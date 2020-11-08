@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Bootstrap</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            height: 1000px;
+        }
+        navbar-nav:hover{
+           background-color: #5E9ECE;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,13 +32,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link" href="eventlist.html">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">History</a>
+                    <a class="nav-link" href="history.html">History</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -40,11 +51,82 @@
             </ul>
         </div>
     </nav>
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-xs-9 col-md-2 col-lg-2">
+                <img src="profile.png" class="rounded-circle" alt="Profile Picture" width="100">
+            </div>
+            <div class="col-sm-3 col-md-3 col-xs-12">
+                <h5>Welcome! Katie Belles</h5>
+            </div>
+        </div>
+    </div>
 
-    <div class="jumbotron">
-        <div class="container-fluid">
-            <div class="alert alert-danger text-center">
-                <strong>IMPORTANT ANNOUNCEMENT!!</strong><br>WORK FROM HOME (WHF) Effective from 27th October - 9th November 2020  
+    <div class="container" >
+        <div class="alert alert-danger text-center">
+            <strong>IMPORTANT ANNOUNCEMENT!!</strong><br>WORK FROM HOME (WHF) Effective from 27th October - 9th
+            November 2020
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <hr class="bg-info" />
+                        <b class="h6">TRAINING</b>
+                        <div class="progress">
+
+                            <div class="progress-bar progress-bar-warning" style="width: 70%; min-width:20px">
+                                70%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <hr class="bg-info" />
+                        <b class="h6">VOLUNTEERING</b>
+                        <div class="progress">
+
+                            <div class="progress-bar" style="width: 40%;">
+                                40%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <hr class="bg-info" />
+                        <b class="h6">TOTAL</b>
+                        <div class="progress">
+
+                            <div class="progress-bar" style="width: 55%;">
+                                55%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+
+                <div class="row">
+                    <img src="schedule.png" class="rounded-circle" alt="Profile Picture" width="100">
+                    <h2>Schedule</h2>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <img src="event.png" class="rounded-circle" alt="Profile Picture" width="100">
+                    <h2>Upcoming Events</h2>
+                </div>
+                
             </div>
         </div>
     </div>

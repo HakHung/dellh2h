@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Bootstrap</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+
+</head>
+
+<body>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+        <a class='navbar-brand' href='#'>ITDP</a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
+            aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+            <span class='navbar-toggler-icon'></span>
+        </button>
+        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+            <ul class='navbar-nav mr-auto'>
+                <li class='nav-item active'>
+                    <a class='nav-link' href='index.html'>Home</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='eventlist.html'>Events</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='history.html'>History</a>
+                </li>
+            </ul>
+            <ul class='navbar-nav'>
+                <li class='nav-item active'>
+                    <a class='nav-link' href='#'>Xuan</a>
+                </li>
+                <li class='nav-item active'>
+                    <a class='nav-link' href='#'><small>Logout</small></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class='container-fliud'>
+        <div class='col-lg-3'>
+            <h4 style='color:#135788;'>: ADD EVENTS</h4>
+        </div>
+        <div class='col-lg-8'>
+            <form class='md-form'>
+                <div class='form-group'>
+                    <label style='color:#135788;'>Event type</label>
+                    <div class='custom-control custom-radio custom-control-inline'>
+                        <input type='radio' id='customRadioInline1' name='customRadioInline1'
+                            class='custom-control-input'>
+                        <label class='custom-control-label' for='customRadioInline1'>Training</label>
+                    </div>
+                    <div class='custom-control custom-radio custom-control-inline'>
+                        <input type='radio' id='customRadioInline2' name='customRadioInline1'
+                            class='custom-control-input'>
+                        <label class='custom-control-label' for='customRadioInline2'>Volunteering</label>
+                    </div>
+                    <div class='custom-control custom-radio custom-control-inline'>
+                        <input type='radio' id='customRadioInline3' name='customRadioInline1'
+                            class='custom-control-input'>
+                        <label class='custom-control-label' for='customRadioInline3'>Team Building</label>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label for='eventname' style='color:#135788;'>Event name</label>
+                    <input type='text' id='eventname' name='eventname'>
+                </div>
+
+                <div class='form-group'>
+                    <label style='color:#135788;'>Upload image</label>
+                    <div class='file-field'>
+                        <div class='btn btn-primary btn-sm float-left'>
+                            <span>Choose file</span>
+                            <input type='file'>
+                        </div>
+                        <div class='file-path-wrapper'>
+                            <input class='file-path validate' type='text' placeholder='Upload your file'>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label for='datepicker' style='color:#135788;'>Date</label>
+                    <input type='date' id='datepicker' name='datepicker'>
+                    <label for='appt' style='color:#135788;'>Starting Time</label>
+                    <input type='time' id='appt' name='appt'>
+                    <label for='appt1' style='color:#135788;'>Ending Time</label>
+                    <input type='time' id='appt1' name='appt1'>
+                </div>
+
+                <div class='form-group'>
+                    <label style='color:#135788;'>Venue</label>
+                </div>
+                <div class='form-group'>
+                    <label style='color:#135788;'>Event Description</label>
+                </div>
+                <button type='submit' class='btn btn-primary'>Save Changes</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+</body>

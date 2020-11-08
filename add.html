@@ -43,68 +43,82 @@
     </nav>
 
 
-    <div class='container-fliud'>
-        <div class='col-lg-3'>
-            <h4 style='color:#135788;'>: ADD EVENTS</h4>
-        </div>
-        <div class='col-lg-8'>
-            <form class='md-form'>
-                <div class='form-group'>
-                    <label style='color:#135788;'>Event type</label>
-                    <div class='custom-control custom-radio custom-control-inline'>
-                        <input type='radio' id='customRadioInline1' name='customRadioInline1'
-                            class='custom-control-input'>
-                        <label class='custom-control-label' for='customRadioInline1'>Training</label>
-                    </div>
-                    <div class='custom-control custom-radio custom-control-inline'>
-                        <input type='radio' id='customRadioInline2' name='customRadioInline1'
-                            class='custom-control-input'>
-                        <label class='custom-control-label' for='customRadioInline2'>Volunteering</label>
-                    </div>
-                    <div class='custom-control custom-radio custom-control-inline'>
-                        <input type='radio' id='customRadioInline3' name='customRadioInline1'
-                            class='custom-control-input'>
-                        <label class='custom-control-label' for='customRadioInline3'>Team Building</label>
-                    </div>
-                </div>
-
-                <div class='form-group'>
-                    <label for='eventname' style='color:#135788;'>Event name</label>
-                    <input type='text' id='eventname' name='eventname'>
-                </div>
-
-                <div class='form-group'>
-                    <label style='color:#135788;'>Upload image</label>
-                    <div class='file-field'>
-                        <div class='btn btn-primary btn-sm float-left'>
-                            <span>Choose file</span>
-                            <input type='file'>
-                        </div>
-                        <div class='file-path-wrapper'>
-                            <input class='file-path validate' type='text' placeholder='Upload your file'>
+    <div class='container'>
+        <div class="row">
+            <div class='col-md-2 mt-2'>
+                <h5 style='color:#135788;'>: ADD EVENTS</h5>
+            </div>
+            <div class='col-md-10 mt-5'>
+                <form class='md-form'>
+                    <div class='form-group'>
+                        <label style='color:#135788;'>Event type</label>
+                        <div>
+                            <div class='custom-control custom-radio custom-control-inline'>
+                                <input type='radio' id='customRadioInline1' name='customRadioInline1'
+                                    class='custom-control-input'>
+                                <label class='custom-control-label' for='customRadioInline1'>Training</label>
+                            </div>
+                            <div class='custom-control custom-radio custom-control-inline'>
+                                <input type='radio' id='customRadioInline2' name='customRadioInline1'
+                                    class='custom-control-input'>
+                                <label class='custom-control-label' for='customRadioInline2'>Volunteering</label>
+                            </div>
+                            <div class='custom-control custom-radio custom-control-inline'>
+                                <input type='radio' id='customRadioInline3' name='customRadioInline1'
+                                    class='custom-control-input'>
+                                <label class='custom-control-label' for='customRadioInline3'>Team Building</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class='form-group'>
-                    <label for='datepicker' style='color:#135788;'>Date</label>
-                    <input type='date' id='datepicker' name='datepicker'>
-                    <label for='appt' style='color:#135788;'>Starting Time</label>
-                    <input type='time' id='appt' name='appt'>
-                    <label for='appt1' style='color:#135788;'>Ending Time</label>
-                    <input type='time' id='appt1' name='appt1'>
-                </div>
+                    <div class='form-group'>
+                        <label for='eventname' style='color:#135788;'>Event name</label>
+                        <input class='form-control' type='text' id='eventname' name='eventname'>
+                    </div>
 
-                <div class='form-group'>
-                    <label style='color:#135788;'>Venue</label>
-                </div>
-                <div class='form-group'>
-                    <label style='color:#135788;'>Event Description</label>
-                </div>
-                <button type='submit' class='btn btn-primary'>Save Changes</button>
-            </form>
+                    <div class='form-group'>
+                        <label style='color:#135788;'>Upload image</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose image</label>
+                        </div>
+
+                    </div>
+                    <div class='form-row'>
+                        <div class='form-group col-md-4'>
+                            <label for='datepicker' style='color:#135788;'>Date</label>
+                            <input class='form-control' type='date' id='datepicker' name='datepicker'>
+                        </div>
+                        <div class='form-group col-md-4'>
+                            <label for='appt' style='color:#135788;'>Starting Time</label>
+                            <input class='form-control' type='time' id='appt' name='appt'>
+                        </div>
+                        <div class='form-group col-md-4'>
+                        <label for='appt1' style='color:#135788;'>Ending Time</label>
+                        <input class='form-control' type='time' id='appt1' name='appt1'>
+                        </div>
+                    </div>
+                    
+                    <div class='form-group'>
+                        <label for='venue' style='color:#135788;'>Venue</label>
+                        <input class='form-control' type='text' id='venue' name='venue'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='description' style='color:#135788;'>Event Description</label>
+                        <textarea class="form-control" id="description" name='description' rows="3"></textarea>
+                    </div>
+                    <button type='submit' class='btn btn-primary'>Save Changes</button>
+                </form>
+            </div>
         </div>
     </div>
     </div>
-
+    <script>
+        //For choose image
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>

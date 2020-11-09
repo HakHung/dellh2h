@@ -16,6 +16,7 @@
         body {
             height: 1000px;
         }
+       
     </style>
     <script>
         function myFunction() {
@@ -33,10 +34,10 @@
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul class='navbar-nav mr-auto'>
-                <li class='nav-item active'>
+                <li class='nav-item'>
                     <a class='nav-link' href='index.php'>Home</a>
                 </li>
-                <li class='nav-item'>
+                <li class='nav-item active'>
                     <a class='nav-link' href='training.php'>Events</a>
                 </li>
                 <li class='nav-item'>

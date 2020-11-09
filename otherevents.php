@@ -34,13 +34,13 @@
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul class='navbar-nav mr-auto'>
-                <li class='nav-item active'>
+                <li class='nav-item '>
                     <a class='nav-link' href='index.php'>Home</a>
                 </li>
-                <li class='nav-item'>
+                <li class='nav-item active'>
                     <a class='nav-link' href='training.php'>Events</a>
                 </li>
-                <li class='nav-item'>
+                <li class='nav-item '>
                     <a class='nav-link' href='history.php'>History</a>
                 </li>
             </ul>
@@ -59,11 +59,8 @@
         <!-- <div class='row'> -->
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
-                    <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
                     <button class='btn btn-outline-primary btn-lg mr-5' type='button'><a href='training.php'>Trainings</a></button>
                     <button class='btn btn-primary btn-lg mr-5' type='button'>Events</button>
-
-                    <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
                 </form>
             </nav>
         <!-- </div> -->

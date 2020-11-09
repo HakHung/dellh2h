@@ -12,10 +12,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="css/templatemo-style.css" rel="stylesheet">
+
     <style>
         body {
             height: 1000px;
         }
+
+        
     </style>
 </head>
 
@@ -48,6 +52,7 @@
             </ul>
         </div>
     </nav>
+    
     <div class="container-fluid" style="padding-left: 5%; padding-right: 5%;  margin:20px;">
         <div class="row">
             <!-- <div class="col-sm-12 col-md-12 col-xs-12"> -->

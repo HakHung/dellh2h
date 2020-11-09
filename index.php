@@ -197,7 +197,10 @@
                                 date_default_timezone_set("Asia/Kuala_Lumpur");
                                 $date = date('Y-m-d');
 
-                                $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
+                                $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.compulsory 
+                                        FROM event_table, user_event
+                                        WHERE datepicker>='$date' AND eventcategory ='other events' AND event_table.eventid = user_event.eventid
+                                        ORDER BY datepicker ";
                                 $result = $conn->query($sql);
 
                                 // IMPORTANT!! php code use ', html code use ''

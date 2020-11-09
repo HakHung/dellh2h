@@ -8,7 +8,7 @@ $dbname = "delldb";
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 
 $userid = 1;
-$eventid = $_GET['eventid'];
+$eventid = $_GET['var'];
 echo $eventid;
 
 if (mysqli_connect_error()) {

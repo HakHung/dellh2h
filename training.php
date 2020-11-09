@@ -19,17 +19,16 @@
     </style>
     <script>
         function myFunction() {
-            alert("Successfully Sign Up to this event!");            
-            document.getElementById("register").style.visibility="hidden";         
-        } 
+            alert("Successfully Sign Up to this event!");
+            document.getElementById("register").style.visibility = "hidden";
+        }
     </script>
 </head>
 
 <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
         <a class='navbar-brand' href='index.php'>ITDP</a>
-        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
-            aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -60,8 +59,8 @@
         <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
             <form class='form-inline '>
                 <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
-                <button class='btn btn-primary mr-5' type='button'>Trainings</button>
-                <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Events</a></button>
+                <button class='btn btn-primary btn-lg mr-5' type='button'>Trainings</button>
+                <button class='btn btn-outline-primary btn-lg mr-5' type='button'><a href='otherevents.php'>Events</a></button>
 
                 <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
             </form>
@@ -113,90 +112,31 @@
                             echo "<div class='card-body'><h1>" . $monthName . "</h1>";
                             echo "<div class='row'>";
                         }
-
-                        date_default_timezone_set("Asia/Kuala_Lumpur");
-                        $date = date('Y-m-d');
-
-                        $sql = "SELECT eventid,eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
-                        $result = $conn->query($sql);
-
-                        // IMPORTANT!! php code use ', html code use ''
-                        if($result->num_rows>0){
-                            while($row = $result->fetch_assoc()){
-                                $var =  $row['eventid'];
-                                echo "Hi";
-                                echo "
-                                <div class='card mx-5' style='width: 18rem;'>
-                                <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
-                                <div class='mx-4 my-4'>
-                                <h5 class='card-title'>" . $row['eventname'] . "</h5>
-                                <p class='card-text'> Date: " . $row['datepicker'] . "</p>
-                                <p class='card-text'> Time: " . $row['appt'] . " - " . $row['appt1'] . "</p>
-                                <p class='card-text'>Venue: " . $row['venue'] . "</p>
-                                </div>
-                                <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                <a href='details.php?eventid=<?php echo $var ?>' id='register' class='btn btn-primary'>Register Now!</a>
-                                </div>
-                                </div>";
-                    }
-                } else {
-                    echo '<p>No events to show</p>';
-                }
-                $conn->close();
-                ?>
-            </div>
-
-                        $date2 = date('m');
-                        
-                        $printedmonth = FALSE;
-                        $count = 1;
-                        for ($i=$date2; $count<12; $i++, $count++){
-                            $printedmonth = FALSE;
-                            if ($i == 12){
-                                $i = 1;
-                            }
-                                                        
-                            if($result->num_rows>0){
-                                $result->data_seek(0);
-                                
-                                while($row = $result->fetch_assoc()){ 
-                                    $month = date("m",strtotime($row['datepicker'])); 
-                                    // echo "<h1>". $month ."</h1>";                                                                         
-                                    if ($month == $i){
-                                        if($printedmonth == FALSE){
-                                            $monthName = date('F', mktime(0, 0, 0, $month, 10));
-                                            $printedmonth=TRUE;
-                                            echo "<div class='card-body'><h1>". $monthName ."</h1>";
-                                            echo "<div class='row'>";                 
-                                        }
-                                                                       
-                                            echo "
+                        $var = $row['eventid'];
+                        echo "
                                             <div class='card mx-5 my-3' style='width: 18rem;'>
                                             <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
                                             <div class='mx-4 my-4'>
-                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
-                                            <p class='card-text'> Date: ". $row['datepicker'] ."</p>
-                                            <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
-                                            <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                            <h5 class='card-title'>" . $row['eventname'] . "</h5>
+                                            <p class='card-text'> Date: " . $row['datepicker'] . "</p>
+                                            <p class='card-text'> Time: " . $row['appt'] . " - " . $row['appt1'] . "</p>
+                                            <p class='card-text'>Venue: " . $row['venue'] . "</p>
                                             </div>
                                             <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                            <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
+                                            <a href='details.php?eventid=<?php echo $var ?>' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
                                             </div>
                                             </div>";
-                                    }
-                                }
-                                echo "</div></div>";
-                            }
-                            else{
-                                echo '<p>No events to show</p>';
-                            }          
-                            
+                    }
+                }
+                echo "</div></div>";
+            } else {
+                echo '<p>No events to show</p>';
+            }
+        }
 
-                        }
-                                     
-                         
-                        $conn->close();
-                    ?>
+
+        $conn->close();
+        ?>
     </div>
 
 

@@ -108,8 +108,9 @@
                                     // echo "<h1>". $month ."</h1>";                                                                         
                                     if ($month == $i){
                                         if($printedmonth == FALSE){
+                                            $monthName = date('F', mktime(0, 0, 0, $month, 10));
                                             $printedmonth=TRUE;
-                                            echo "<div class='card-body'><h1>". $i ."</h1>";
+                                            echo "<div class='card-body'><h1>". $monthName ."</h1>";
                                             echo "<div class='row'>";                 
                                         }
                                                                        
@@ -123,7 +124,7 @@
                                             <p class='card-text'>Venue: ". $row['venue'] ."</p>
                                             </div>
                                             <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                            <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
+                                            <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
                                             </div>
                                             </div>";
                                     }

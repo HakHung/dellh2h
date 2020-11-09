@@ -53,7 +53,7 @@
         <!-- <div class='row'> -->
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button>
+                    <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
                     <button class='btn btn-outline-primary mr-5' type='button'><a href='training.php'>Trainings</a></button>
                     <button class='btn btn-primary mr-5' type='button'>Events</button>
 

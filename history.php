@@ -41,147 +41,146 @@
     </div>
   </nav>
   <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "delldb";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "delldb";
 
-  $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-  date_default_timezone_set("Asia/Kuala_Lumpur");
-  $date = date('Y-m-d');
-
-  $sql = "SELECT TIMEDIFF(event_table.appt1,event_table.appt) AS time1, eventid FROM event_table";
-                        $result2 = $conn->query($sql);
-
-                        //Create a SQL String
-                        if($result2->num_rows>0){
-                            while($row = $result2->fetch_assoc()){
-
-                                $sql = "UPDATE user_event SET contribution='".$row['time1']."' WHERE eventid = ".$row['eventid']." AND userid=1";
-                                $conn->query($sql);
-                            } 
-                        }
-
-  $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description 
-                  FROM event_table
-                  WHERE datepicker>='$date' AND eventcategory ='training' AND eventid NOT IN (SELECT eventid FROM user_event)
-                  ORDER BY datepicker ";
-  $result = $conn->query($sql);
-
-  $date2 = date('m');
-
-  $printedmonth = FALSE;
-  $count = 1;
-  echo "<div class='container'>
-  <h2>Statistics</h2>
-  <table class='table table-hover text-center col-10'>
-    <thead class='thead-dark'>
-      <tr>
-      <th>Month</th>
-<th>Training (Hour)</th>
-<th>Event (Hour)</th>
-<th>Total (Hour)</th>
-</tr>
-</thead>
-<tbody>
-";
-  for ($i = $date2; $count < 12; $i++, $count++) {
-      $printedmonth = FALSE;
-      if ($i == 12) {
-          $i = 1;
-      }
-
-      if ($result->num_rows > 0) {
-          $result->data_seek(0);
-
-          while ($row = $result->fetch_assoc()) {
-              $month = date("m", strtotime($row['datepicker']));
-              // echo "<h1>". $month ."</h1>";                                                                         
-              if ($month == $i) {
-                  if ($printedmonth == FALSE) {
-                      $monthName = date('F', mktime(0, 0, 0, $month, 10));
-                      $printedmonth = TRUE;
-                      echo "<tr><td>" . $monthName . "</td>";
-                      echo "<td>" . $row['eventname'] . "</td>";
-                  }
-                }
-            }
-        }
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
     }
-echo "</tr>
-</tbody>
-</table>
-  </div>";
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $date = date('Y-m-d');
 
-  echo" <div class='container'>
+    $sql = "SELECT event_table.eventid, event_table.eventname,MONTH(event_table.datepicker) AS month,event_table.appt,event_table.appt1,event_table.venue
+                    FROM event_table, user_event
+                    WHERE event_table.eventcategory ='training' AND user_event.eventid = event_table.eventid  AND user_event.userid = 1
+                    ORDER BY event_table.datepicker ";
+    $result = $conn->query($sql);
 
-  <div class='row'>
-    <h4 class='m-3'>History Activities Details</h4>
-    <form class='form-inline '>
+    $date2 = date('m');
 
-      <button class='btn btn-primary mr-5' type='button'>OCT - DEC</button>
-      <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JAN - MAR</button></a>
-      <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>APR - JUN</button></a>
-      <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JUL - SEP</button></a>
-    </form>
-
-  </div>
-
-  </nav>
-
-
-  <table class='table table-hover table-sm text-center col-10'>
-    <thead class='thead-dark'>
-      <tr>
-        <th colspan='5'>Oct 2020</th>
-      </tr>
-    </thead>
-    <thead class='thead-dark'>
-      <tr>
-        <th>Events</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Venue</th>
-        <th>Contribution Hours</th>
-      </tr>
-    </thead>
-    <tbody>
-      ";
-
-      for ($i = $date2; $count < 12; $i++, $count++) {
+    $printedmonth = FALSE;
+    $count = 1;
+    echo "<div class='container'>
+          <h2>Statistics</h2>
+          <table class='table table-hover text-center col-10'>
+            <thead class='thead-dark'>
+              <tr>
+              <th>Month</th>
+        <th>Training (Hour)</th>
+        <th>Event (Hour)</th>
+        <th>Total (Hour)</th>
+        </tr>
+        </thead>
+        <tbody>
+  ";
+    for ($i = $date2; $count < 12; $i++, $count++) {
         $printedmonth = FALSE;
         if ($i == 12) {
             $i = 1;
         }
-  
+
         if ($result->num_rows > 0) {
             $result->data_seek(0);
-  
+
             while ($row = $result->fetch_assoc()) {
-                $month = date("m", strtotime($row['datepicker']));
+                // $month = date("m", strtotime($row['datepicker']));
                 // echo "<h1>". $month ."</h1>";                                                                         
-                if ($month == $i) {
+                if ($row['month'] == $i) {
                     if ($printedmonth == FALSE) {
-                        $monthName = date('F', mktime(0, 0, 0, $month, 10));
+                        $monthName = date('F', mktime(0, 0, 0, $row['month'], 10));
                         $printedmonth = TRUE;
-                        echo "<tr><td>" . $row['datepicker']. "</td>";
-                        echo "<td>" . $row['appt']. " - ". $row['appt1'] . "</td>";
-                        echo "<td>"  . $row['venue'] . "</td>";
-                        echo "<td>"  . $row['contribution']. "</td>";
+                        echo "<tr><td>" . $monthName . "</td>";
+
+                      //   $sql = "SELECT SUM(user_event.contribution) AS THour FROM user_event,event_table WHERE MONTH(".$row['month'].") = MONTH(event_table.datepicker)"
+                      //   $result2 = $conn->query($sql);
+                      //   if($result2->num_rows>0){
+                      //     while($row2 = $result2->fetch_assoc()){
+                      //       echo "<td>" . $row2['THour'] . "</td>";
+                      //     } 
+                      // }
+
+
+                        
+                        
                     }
                   }
               }
           }
       }
-      echo "</tr>
-</tbody>
-</table>
-  </div>";   
-  ?>
+  echo "</tr>
+  </tbody>
+  </table>
+    </div>";
+
+    echo" <div class='container'>
+
+    <div class='row'>
+      <h4 class='m-3'>History Activities Details</h4>
+      <form class='form-inline '>
+
+        <button class='btn btn-primary mr-5' type='button'>OCT - DEC</button>
+        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JAN - MAR</button></a>
+        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>APR - JUN</button></a>
+        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JUL - SEP</button></a>
+      </form>
+
+    </div>
+
+    </nav>
+
+
+    <table class='table table-hover table-sm text-center col-10'>
+      <thead class='thead-dark'>
+        <tr>
+          <th colspan='5'>Oct 2020</th>
+        </tr>
+      </thead>
+      <thead class='thead-dark'>
+        <tr>
+          <th>Events</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Venue</th>
+          <th>Contribution Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        ";
+
+        for ($i = $date2; $count < 12; $i++, $count++) {
+          $printedmonth = FALSE;
+          if ($i == 12) {
+              $i = 1;
+          }
+    
+          if ($result->num_rows > 0) {
+              $result->data_seek(0);
+    
+              while ($row = $result->fetch_assoc()) {
+                  $month = date("m", strtotime($row['datepicker']));
+                  // echo "<h1>". $month ."</h1>";                                                                         
+                  if ($month == $i) {
+                      if ($printedmonth == FALSE) {
+                          $monthName = date('F', mktime(0, 0, 0, $month, 10));
+                          $printedmonth = TRUE;
+                          echo "<tr><td>" . $row['datepicker']. "</td>";
+                          echo "<td>" . $row['appt']. " - ". $row['appt1'] . "</td>";
+                          echo "<td>"  . $row['venue'] . "</td>";
+                          echo "<td>"  . $row['contribution']. "</td>";
+                      }
+                    }
+                }
+            }
+        }
+        echo "</tr>
+  </tbody>
+  </table>
+    </div>";   
+    ?>
   <!-- <div class='container'>
     <h2>Statistics</h2>
     <table class='table table-hover text-center col-10'>

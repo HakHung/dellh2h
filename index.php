@@ -21,7 +21,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="index.html">ITDP</a>
+        <a class="navbar-brand" href="index.php">ITDP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="training.php">Events</a>
@@ -120,25 +120,55 @@
                     <img src="schedule.png" class="rounded-circle" alt="schedule" width="100">
                     <h4>Training Program Schedule</h4>
 
-                    <div class="col-md-12">
-                        <div class="card m-1">
-                            <div class="card-header">
-                                <h5 class="card-title">Training Program 1</h5>
-                                <h6 class='class-subtitle'>Webminar</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoom<br>
-                                    Contribution hour: 2hours
-                                </p>
-                                <span class="badge badge-info float-right">Optional</span>
-                            </div>
-                        </div>
+                    <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "delldb";
+                    
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                    
+                        if($conn->connect_error){
+                            die("Connection failed: " .$conn->connect_error);
+                        }
 
-                    </div>
+                        date_default_timezone_set("Asia/Kuala_Lumpur");
+                        $date = date('Y-m-d');
 
-                    <div class="col-md-12">
+                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
+                        $result = $conn->query($sql);
+
+                        // IMPORTANT!! php code use ', html code use ''
+                        if($result->num_rows>0){
+                            while($row = $result->fetch_assoc()){
+                                echo "
+                                <div class='col-md-12'>
+                                    <div class='card m-1'>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>Training Program 1</h5>
+                                            <h6 class='class-subtitle'>Webminar</h6>
+                                        </div>
+                                        <div class='card-body'>
+                                            <p>Date: ". $row['eventname'] ."<br>
+                                                Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
+                                                Venue: ". $row['venue'] ."<br>
+                                                Contribution hour: 2hours
+                                            </p>
+                                            <span class='badge badge-info float-right'>Optional</span>
+                                        </div>
+                                    </div>
+                                </div>";
+                            }
+                        }
+                        else{
+                            echo '<p>No events to show</p>';
+                        }
+                        $conn->close();
+                    ?>
+
+                    
+
+                    <!-- <div class="col-md-12">
                         <div class="card ">
                             <div class="card-header">
                                 <h5 class="card-title">Training Program 1</h5>
@@ -255,7 +285,7 @@
                         <h6 class='class-subtitle'>Volunteering</h6>
                     </div>
                 </div>
-            </div>
+            </div> -->
 </body>
 
 </html>

@@ -7,16 +7,15 @@ $dbname = "delldb";
 // Create connection
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 
-$userid = 003;
-$username = 'Xuan';
+$userid = 1;
 $eventid = $_GET['eventid'];
-$contribute = 2;
+echo $eventid;
 
 if (mysqli_connect_error()) {
     die('Connect Error (' . mysqli_connect_errno() . ') '
         . mysqli_connect_error());
 } else {
-    $sql = "INSERT INTO userevent (userid, username, eventid, contribute) values ('$userid','$username', '$eventid','$contribute')";
+    $sql = "INSERT INTO user_event (userid, eventid) values ('$userid', '$eventid')";
     if ($conn->query($sql)) {
         echo "New record is inserted sucessfully";
         include('details.html');

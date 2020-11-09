@@ -167,7 +167,6 @@
                                             <p>Date: ". $row['datepicker'] ."<br>
                                                 Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
                                                 Venue: ". $row['venue'] ."<br>
-                                                // Contribution hour: ". substr($row['contribution'],0, 2) ."hours ". substr($row['contribution'],3, 2) ."minutes<br>
                                                 Contribution hour: ". $row['contribution']."<br>
 
                                             </p>";

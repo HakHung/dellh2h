@@ -1,5 +1,5 @@
 <?php
-
+echo "Hi";
 $host = "localhost";
 $dbusername = "root";
 $dbpassword = "";
@@ -9,7 +9,7 @@ $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 
 $userid = 003;
 $username = 'Xuan';
-$eventid = 1;
+$eventid = $_GET['eventid'];
 $contribute = 2;
 
 if (mysqli_connect_error()) {

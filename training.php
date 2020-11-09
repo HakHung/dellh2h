@@ -85,12 +85,14 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
+                        $sql = "SELECT eventid,eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
+                                $var =  $row['eventid'];
+                                echo "Hi";
                                 echo "
                                 <div class='card mx-5' style='width: 18rem;'>
                                 <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
@@ -101,7 +103,7 @@
                                 <p class='card-text'>Venue: " . $row['venue'] . "</p>
                                 </div>
                                 <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
+                                <a href='details.php?eventid=<?php echo $var ?>' id='register' class='btn btn-primary'>Register Now!</a>
                                 </div>
                                 </div>";
                     }

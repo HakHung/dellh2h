@@ -157,9 +157,13 @@
                                                 Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
                                                 Venue: ". $row['venue'] ."<br>
                                                 Contribution hour: 2hours
-                                            </p>
-                                            <span class='badge badge-info float-right'>Optional</span>
-                                        </div>
+                                            </p>";
+                                            if ($row['compulsory'] == "Yes") {
+                                                echo "<span class='badge badge-danger float-right'>Compulsory</span>";
+                                              }
+                                              else{
+                                                  echo"<span class='badge badge-info float-right'>Optional</span>";}
+                                       echo" </div>
                                         </a>
                                     </div>
                                 </div>";

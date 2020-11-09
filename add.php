@@ -7,10 +7,19 @@ $appt1 = filter_input(INPUT_POST, 'appt1');
 $venue = filter_input(INPUT_POST, 'venue');
 $description = filter_input(INPUT_POST, 'description');
 
-
-if($_POST["eventtype"] == "Training"){
-    $eventtype = "Training";
+if($_POST["eventcategory"] == "Training"){
+    $eventcategory = "Training";
 }else{
+    $eventcategory = "Other Events";
+}
+
+if($_POST["eventtype"] == "Workshop"){
+    $eventtype = "Workshop";
+}else if($_POST["eventtype"] == "Webminar"){
+    $eventtype = "Webminar";
+}else if($_POST["eventtype"] == "Team Building"){
+    $eventtype = "Team Building";
+}else {
     $eventtype = "Volunteering";
 }
 
@@ -33,7 +42,7 @@ if (!empty($eventname || !empty($date))) {
             die('Connect Error (' . mysqli_connect_errno() . ') '
                 . mysqli_connect_error());
         } else {
-            $sql = "INSERT INTO event_table (eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory) values ('$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory')";
+            $sql = "INSERT INTO event_table (eventcategory, eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory) values ('$eventcategory','$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory')";
             if ($conn->query($sql)) {
                 echo "New record is inserted sucessfully";
             } else {

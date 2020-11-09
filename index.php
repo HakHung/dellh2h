@@ -35,7 +35,7 @@
                     <a class="nav-link" href="training.php">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="history.html">History</a>
+                    <a class="nav-link" href="history.php">History</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -302,8 +302,79 @@
                         <div class="row">
                             
                             <h3><img src="schedule.png" class="rounded-circle" alt="schedule" height="90" style="vertical-align: middle">Event Schedule</h3>  
+<<<<<<< HEAD
+                            <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "delldb";
+                    
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                    
+                        if($conn->connect_error){
+                            die("Connection failed: " .$conn->connect_error);
+                        }
+
+                        date_default_timezone_set("Asia/Kuala_Lumpur");
+                        $date = date('Y-m-d');
+
+                        $sql = "SELECT TIMEDIFF(event_table.appt1,event_table.appt) AS time1, eventid FROM event_table";
+                        $result2 = $conn->query($sql);
+
+                        //Create a SQL String
+                        if($result2->num_rows>0){
+                            while($row = $result2->fetch_assoc()){
+
+                                $sql = "UPDATE user_event SET contribution='".$row['time1']."' WHERE eventid = ".$row['eventid']." AND userid=1";
+                                $conn->query($sql);
+                            } 
+                        }
+                        
+                        $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt ,event_table.appt1, event_table.venue,event_table.compulsory, user_event.contribution
+                        FROM event_table, user_event
+                        WHERE datepicker>='$date' AND eventcategory ='Other Events' AND event_table.eventid = user_event.eventid AND userid=1
+                        ORDER BY datepicker";
+                        $result = $conn->query($sql);                     
+
+
+                        if($result->num_rows>0){
+                            while($row = $result->fetch_assoc()){
+                                echo "
+                                <div class='col-md-12 mb-3'>
+                                    <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                            <h6 class='class-subtitle'>". $row['eventtype'] ."</h6>
+                                        </div>
+                                        <div class='card-body'>
+                                            <p>Date: ". $row['datepicker'] ."<br>
+                                                Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
+                                                Venue: ". $row['venue'] ."<br>
+                                                Contribution hour: ". $row['contribution']."<br>
+
+                                            </p>";
+
+                                            if ($row['compulsory'] == "Yes") {
+                                                echo "<span class='badge badge-danger float-right'>Compulsory</span>";
+                                              }
+                                            else{
+                                                  echo"<span class='badge badge-info float-right'>Optional</span>";}
+                                            
+                                       echo" </div>
+                                        </a>
+                                    </div>
+                                </div>";
+                            }
+                        }
+                        else{
+                            echo '<p>No events to show</p>';
+                        }
+                        $conn->close();
+                    ?>
+=======
                                 
                             
+>>>>>>> c77366d0056d1d2fa26876fb7c1e09842bcb3414
                         </div>
                     </div>
 

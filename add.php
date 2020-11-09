@@ -45,6 +45,8 @@ if (!empty($eventname || !empty($date))) {
             $sql = "INSERT INTO event_table (eventcategory, eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory) values ('$eventcategory','$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory')";
             if ($conn->query($sql)) {
                 echo "New record is inserted sucessfully";
+                include('training.php');
+
             } else {
                 echo "Error: " . $sql . "
 " . $conn->error;

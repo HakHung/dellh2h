@@ -226,7 +226,7 @@
                                     }
                                 }
                                 else{
-                                    echo '<p>No events to show</p>';
+                                    echo '<h6>No events to show</h6>';
                                 }
                                 $conn->close();
                             ?>                        

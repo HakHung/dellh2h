@@ -85,16 +85,21 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
                         $result = $conn->query($sql);
+
+                        // for ($i=1; $i<=12; $i++){
+                        //     if ($i == )
+                        // }
 
                         // IMPORTANT!! php code use ', html code use ''
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
+                                $month = date("m",strtotime($row['datepicker']));                               
+
                                 echo "
-                                
                                 <div class='card mx-5' style='width: 18rem;'>
-                                <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
+                                <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
                                 <div class='mx-4 my-4'>
                                 <h5 class='card-title'>". $row['eventname'] ."</h5>
                                 <p class='card-text'> Date: ". $row['datepicker'] ."</p>

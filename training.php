@@ -93,7 +93,7 @@
                             while($row = $result->fetch_assoc()){
                                 echo "
                                 <div class='card mx-5' style='width: 18rem;'>
-                                <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
+                                <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
                                 <div class='mx-4 my-4'>
                                 <h5 class='card-title'>". $row['eventname'] ."</h5>
                                 <p class='card-text'> Date: ". $row['datepicker'] ."</p>

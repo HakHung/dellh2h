@@ -117,8 +117,8 @@
             <div class="col-md-4 m-2">
 
                 <div class="row">
-                    <img src="schedule.png" class="rounded-circle" alt="schedule" width="100">
-                    <h4>Training Program Schedule</h4>
+                    
+                    <h3><img src="schedule.png" class="rounded-circle" alt="schedule" height="90" style="vertical-align: middle">Training Program Schedule</h3>
 
                     <?php
                         $servername = "localhost";
@@ -135,14 +135,17 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
+                        $sql = "SELECT event_table.eventname, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.description 
+                        FROM event_table, user_event
+                        WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid
+                        ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
                                 echo "
-                                <div class='col-md-12'>
+                                <div class='col-md-12 mb-3'>
                                     <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
                                         <div class='card-header'>
                                             <h5 class='card-title'>Training Program 1</h5>
@@ -172,8 +175,8 @@
                     <div class="col-md-4 m-2 ">
 
                         <div class="row">
-                            <img src="schedule.png" class="rounded-circle" alt="schedule" width="100">
-                            <h3>Event Schedule</h3>  
+                            
+                            <h3><img src="schedule.png" class="rounded-circle" alt="schedule" height="90" style="vertical-align: middle">Event Schedule</h3>  
                             <?php
                                 $servername = "localhost";
                                 $username = "root";
@@ -196,7 +199,7 @@
                                 if($result->num_rows>0){
                                     while($row = $result->fetch_assoc()){
                                         echo "
-                                        <div class='col-md-12'>
+                                        <div class='col-md-12  mb-3'>
                                             <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
                                                 <div class='card-header'>
                                                     <h5 class='card-title'>". $row['eventname'] ."</h5>
@@ -226,8 +229,8 @@
 
                     <div class="col-md-3 my-3 m-2 ">
                         <div class="row">
-                            <img src="event.png" class="rounded-circle" alt="Profile Picture" width="100">
-                            <h6>Recomended Event</h6>
+                            
+                            <h3><img src="event.png" class="rounded-circle" alt="Profile Picture" height="90" style="vertical-align: middle">Recomended Event</h3>
                         </div>
                         <?php
                                 $servername = "localhost";

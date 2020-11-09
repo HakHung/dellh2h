@@ -65,9 +65,7 @@
             </nav>
         <!-- </div> -->
 
-        <div class='card-body'>
-            <div class="row">
-            <?php
+        <?php
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
@@ -82,34 +80,63 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='learning path'";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='trainings' ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
-                        // IMPORTANT!! php code use ', html code use ''
-                        if($result->num_rows>0){
-                            while($row = $result->fetch_assoc()){
-                                echo "
-                                
-                                <div class='card mx-5' style='width: 18rem;'>
-                                <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
-                                <h5 class='card-title'>". $row['eventname'] ."</h5>
-                                <p class='card-text'> Date: ". $row['datepicker'] ."</p>
-                                <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
-                                <p class='card-text'>Venue: ". $row['venue'] ."</p>
-                                <a href='#' class='btn btn-primary'>Register Now!</a>
-                                </div>";
+                        // for ($i=1; $i<=12; $i++){
+                        //     if ($i == )
+                        // }
+
+                        $date2 = date('m');
+                        
+                        $printedmonth = FALSE;
+                        $count = 1;
+                        for ($i=$date2; $count<12; $i++, $count++){
+                            $printedmonth = FALSE;
+                            if ($i == 12){
+                                $i = 1;
                             }
+                                                        
+                            if($result->num_rows>0){
+                                $result->data_seek(0);
+                                
+                                while($row = $result->fetch_assoc()){ 
+                                    $month = date("m",strtotime($row['datepicker'])); 
+                                    // echo "<h1>". $month ."</h1>";                                                                         
+                                    if ($month == $i){
+                                        if($printedmonth == FALSE){
+                                            $printedmonth=TRUE;
+                                            echo "<div class='card-body'><h1>". $i ."</h1>";
+                                            echo "<div class='row'>";                 
+                                        }
+                                                                       
+                                            echo "
+                                            <div class='card mx-5' style='width: 18rem;'>
+                                            <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
+                                            <div class='mx-4 my-4'>
+                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                            <p class='card-text'> Date: ". $row['datepicker'] ."</p>
+                                            <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
+                                            <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                            </div>
+                                            <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
+                                            <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
+                                            </div>
+                                            </div>";
+                                    }
+                                }
+                                echo "</div></div>";
+                            }
+                            else{
+                                echo '<p>No events to show</p>';
+                            }          
+                            
+
                         }
-                        else{
-                            echo '<p>No events to show</p>';
-                        }
+                                     
+                     
                         $conn->close();
                     ?>
-            </div>
-
-        
-
-    </div>
     </div>
 
     

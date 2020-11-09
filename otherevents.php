@@ -60,16 +60,15 @@
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
                     <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='training.php'>Trainings</a></button>
-                    <button class='btn btn-primary mr-5' type='button'>Events</button>
+                    <button class='btn btn-outline-primary btn-lg mr-5' type='button'><a href='training.php'>Trainings</a></button>
+                    <button class='btn btn-primary btn-lg mr-5' type='button'>Events</button>
 
                     <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
                 </form>
             </nav>
         <!-- </div> -->
 
-        <div class='card-body'>
-            <div class="row">
+
             <?php
                         $servername = "localhost";
                         $username = "root";
@@ -85,41 +84,108 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description 
+                        FROM event_table 
+                        WHERE datepicker>='$date' AND eventcategory ='other events' AND  eventid NOT IN (SELECT eventid FROM user_event) 
+                        ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
-                        // for ($i=1; $i<=12; $i++){
-                        //     if ($i == )
-                        // }
-
-                        // IMPORTANT!! php code use ', html code use ''
-                        if($result->num_rows>0){
-                            while($row = $result->fetch_assoc()){
-                                $month = date("m",strtotime($row['datepicker']));                               
-
-                                echo "
-                                <div class='card mx-5' style='width: 18rem;'>
-                                <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
-                                <div class='mx-4 my-4'>
-                                <h5 class='card-title'>". $row['eventname'] ."</h5>
-                                <p class='card-text'> Date: ". $row['datepicker'] ."</p>
-                                <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
-                                <p class='card-text'>Venue: ". $row['venue'] ."</p>
-                                </div>
-                                <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
-                                </div>
-                                </div>";
+                        $date2 = date('m');
+                        
+                        $printedmonth = FALSE;
+                        $count = 1;
+                        for ($i=$date2; $count<12; $i++, $count++){
+                            $printedmonth = FALSE;
+                            if ($i == 12){
+                                $i = 1;
                             }
+                                                        
+                            if($result->num_rows>0){
+                                $result->data_seek(0);
+                                
+                                while($row = $result->fetch_assoc()){ 
+                                    $month = date("m",strtotime($row['datepicker'])); 
+                                    // echo "<h1>". $month ."</h1>";                                                                         
+                                    if ($month == $i){
+                                        $monthName = date('F', mktime(0, 0, 0, $month, 10));
+                                        if($printedmonth == FALSE){
+                                            $printedmonth=TRUE;
+                                            echo "<div class='card-body'><h1>". $monthName ."</h1>";
+                                            echo "<div class='row'>";                 
+                                        }
+                                                                       
+                                            echo "
+                                            <div class='card mx-5 my-3' style='width: 18rem;'>
+                                            <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
+                                            <div class='mx-4 my-4'>
+                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                            <p class='card-text'> Date: ". $row['datepicker'] ."</p>
+                                            <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
+                                            <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                            </div>
+                                            <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
+                                            <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
+                                            </div>
+                                            </div>";
+                                    }
+                                }
+                                echo "</div></div>";
+                            }
+                            else{
+                                echo '<p>No events to show</p>';
+                            }          
+                            
+
                         }
-                        else{
-                            echo '<p>No events to show</p>';
-                        }
+                                     
+                                   
+                                
+
+                        // if($result->num_rows>0){
+                        //     while($row = $result->fetch_assoc()){
+                        //         $month = date("m",strtotime($row['datepicker']));
+                                
+                        //         for ($i=1; $i<=12; $i++){
+                                    
+                        //             if ($month == $i){
+                        //                 echo "<h1>". $i ."</h1>";
+                        //                 echo "
+                        //                 <div class='card mx-5' style='width: 18rem;'>
+                        //                 <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
+                        //                 <div class='mx-4 my-4'>
+                        //                 <h5 class='card-title'>". $row['eventname'] ."</h5>
+                        //                 <p class='card-text'> Date: ". $row['datepicker'] ."</p>
+                        //                 <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
+                        //                 <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                        //                 </div>
+                        //                 <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
+                        //                 <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
+                        //                 </div>
+                        //                 </div>";
+                        //             }
+                        //         }
+
+                                // echo "
+                                // <div class='card mx-5' style='width: 18rem;'>
+                                // <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
+                                // <div class='mx-4 my-4'>
+                                // <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                // <p class='card-text'> Date: ". $row['datepicker'] ."</p>
+                                // <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
+                                // <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                // </div>
+                                // <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
+                                // <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
+                                // </div>
+                                // </div>";
+                            
+                        
+                        // else{
+                        //     echo '<p>No events to show</p>';
+                        // }
                         $conn->close();
                     ?>
-            </div>
 
-    </div>
     </div>
   
 

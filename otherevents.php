@@ -68,8 +68,7 @@
             </nav>
         <!-- </div> -->
 
-        <!-- <div class='card-body'>
-            <div class="row"> -->
+
             <?php
                         $servername = "localhost";
                         $username = "root";
@@ -116,7 +115,7 @@
                                         }
                                                                        
                                             echo "
-                                            <div class='card mx-5' style='width: 18rem;'>
+                                            <div class='card mx-5 my-3' style='width: 18rem;'>
                                             <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
                                             <div class='mx-4 my-4'>
                                             <h5 class='card-title'>". $row['eventname'] ."</h5>
@@ -186,9 +185,7 @@
                         // }
                         $conn->close();
                     ?>
-            <!-- </div>
 
-        </div> -->
     </div>
   
 

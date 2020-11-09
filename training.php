@@ -17,6 +17,12 @@
             height: 1000px;
         }
     </style>
+    <script>
+        function myFunction() {
+            alert("Successfully Sign Up to this event!");            
+            document.getElementById("register").style.visibility="hidden";         
+        } 
+    </script>
 </head>
 
 <body>
@@ -79,7 +85,7 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training'";
+                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
@@ -95,7 +101,7 @@
                                 <p class='card-text'>Venue: ". $row['venue'] ."</p>
                                 </div>
                                 <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                <a href='#' class='btn btn-primary'>Register Now!</a>
+                                <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
                                 </div>
                                 </div>";
                             }

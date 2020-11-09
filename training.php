@@ -115,7 +115,7 @@
                             echo "<div class='card-body'><h1>" . $monthName. " " .$year. "</h1>";
                             echo "<div class='row'>";
                         }
-                        $var = $row['eventid'];
+                     
                         echo "
                                             <div class='card mx-5 my-3' style='width: 18rem;'>
                                             <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
@@ -126,9 +126,9 @@
                                             <p class='card-text'>Venue: " . $row['venue'] . "</p>
                                             </div>
                                             <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                            <a href='details.php?eventid=<?php echo $var ?>' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
+                                            <a href='details.php?eventid= ".$row['eventid']."' id='register' onclick='myFunction()' class='btn btn-primary'>Enroll Now!</a>
                                             </div>
-                                            </div>";
+                                            </div>"; 
                     }
                 }
                 echo "</div></div>";

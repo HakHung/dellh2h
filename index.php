@@ -269,7 +269,7 @@
                         
                         $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt ,event_table.appt1, event_table.venue,event_table.compulsory, user_event.contribution
                         FROM event_table, user_event
-                        WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                        WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid 
                         ORDER BY datepicker";
                         $result = $conn->query($sql);                     
 

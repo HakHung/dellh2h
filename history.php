@@ -40,148 +40,8 @@
       </ul>
     </div>
   </nav>
-  <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "delldb";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    date_default_timezone_set("Asia/Kuala_Lumpur");
-    $date = date('Y-m-d');
-
-    $sql = "SELECT event_table.eventid, event_table.eventname,MONTH(event_table.datepicker) AS month,event_table.appt,event_table.appt1,event_table.venue
-                    FROM event_table, user_event
-                    WHERE event_table.eventcategory ='training' AND user_event.eventid = event_table.eventid  AND user_event.userid = 1
-                    ORDER BY event_table.datepicker ";
-    $result = $conn->query($sql);
-
-    $date2 = date('m');
-
-    $printedmonth = FALSE;
-    $count = 1;
-    echo "<div class='container'>
-          <h2>Statistics</h2>
-          <table class='table table-hover text-center col-10'>
-            <thead class='thead-dark'>
-              <tr>
-              <th>Month</th>
-        <th>Training (Hour)</th>
-        <th>Event (Hour)</th>
-        <th>Total (Hour)</th>
-        </tr>
-        </thead>
-        <tbody>
-  ";
-    for ($i = $date2; $count < 12; $i++, $count++) {
-        $printedmonth = FALSE;
-        if ($i == 12) {
-            $i = 1;
-        }
-
-        if ($result->num_rows > 0) {
-            $result->data_seek(0);
-
-            while ($row = $result->fetch_assoc()) {
-                // $month = date("m", strtotime($row['datepicker']));
-                // echo "<h1>". $month ."</h1>";                                                                         
-                if ($row['month'] == $i) {
-                    if ($printedmonth == FALSE) {
-                        $monthName = date('F', mktime(0, 0, 0, $row['month'], 10));
-                        $printedmonth = TRUE;
-                        echo "<tr><td>" . $monthName . "</td>";
-
-                      //   $sql = "SELECT SUM(user_event.contribution) AS THour FROM user_event,event_table WHERE MONTH(".$row['month'].") = MONTH(event_table.datepicker)"
-                      //   $result2 = $conn->query($sql);
-                      //   if($result2->num_rows>0){
-                      //     while($row2 = $result2->fetch_assoc()){
-                      //       echo "<td>" . $row2['THour'] . "</td>";
-                      //     } 
-                      // }
-
-
-                        
-                        
-                    }
-                  }
-              }
-          }
-      }
-  echo "</tr>
-  </tbody>
-  </table>
-    </div>";
-
-    echo" <div class='container'>
-
-    <div class='row'>
-      <h4 class='m-3'>History Activities Details</h4>
-      <form class='form-inline '>
-
-        <button class='btn btn-primary mr-5' type='button'>OCT - DEC</button>
-        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JAN - MAR</button></a>
-        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>APR - JUN</button></a>
-        <a href='#'><button class='btn btn-outline-primary mr-5' type='button'>JUL - SEP</button></a>
-      </form>
-
-    </div>
-
-    </nav>
-
-
-    <table class='table table-hover table-sm text-center col-10'>
-      <thead class='thead-dark'>
-        <tr>
-          <th colspan='5'>Oct 2020</th>
-        </tr>
-      </thead>
-      <thead class='thead-dark'>
-        <tr>
-          <th>Events</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Venue</th>
-          <th>Contribution Hours</th>
-        </tr>
-      </thead>
-      <tbody>
-        ";
-
-        for ($i = $date2; $count < 12; $i++, $count++) {
-          $printedmonth = FALSE;
-          if ($i == 12) {
-              $i = 1;
-          }
-    
-          if ($result->num_rows > 0) {
-              $result->data_seek(0);
-    
-              while ($row = $result->fetch_assoc()) {
-                  $month = date("m", strtotime($row['datepicker']));
-                  // echo "<h1>". $month ."</h1>";                                                                         
-                  if ($month == $i) {
-                      if ($printedmonth == FALSE) {
-                          $monthName = date('F', mktime(0, 0, 0, $month, 10));
-                          $printedmonth = TRUE;
-                          echo "<tr><td>" . $row['datepicker']. "</td>";
-                          echo "<td>" . $row['appt']. " - ". $row['appt1'] . "</td>";
-                          echo "<td>"  . $row['venue'] . "</td>";
-                          echo "<td>"  . $row['contribution']. "</td>";
-                      }
-                    }
-                }
-            }
-        }
-        echo "</tr>
-  </tbody>
-  </table>
-    </div>";   
-    ?>
-  <!-- <div class='container'>
+  
+  <div class='container-fluid'>
     <h2>Statistics</h2>
     <table class='table table-hover text-center col-10'>
       <thead class='thead-dark'>
@@ -194,42 +54,37 @@
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
+          <td>October</td>
+          <td>10</td>
           <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>13</td>
         </tr>
         <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>November</td>
+          <td>12</td>
+          <td>2</td>
+          <td>14</td>
         </tr>
+        <tr>
+          <td>December</td>
+          <td>2</td>
+          <td>0</td>
+          <td>2</td>
+        </tr>
+       
       </tbody>
       <thead class='thead-light'>
         <tr>
           <th>Total</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>24</th>
+          <th>5</th>
+          <th>29</th>
         </tr>
       </thead>
     </table>
-  </div> -->
+  </div>
 
-  <div class='container'>
+  <div class='container-fluid'>
 
     <div class='row'>
       <h4 class='m-3'>History Activities Details</h4>
@@ -263,32 +118,32 @@
       </thead>
       <tbody>
         <tr>
-          <td>Training 1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
+          <td>Dell Hack2Hire</td>
+          <td>01-Oct-20</td>
+          <td>9:00am - 12:00pm</td>
+          <td>Zoom</td>
           <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
+          <td>CyberSecurity</td>
+          <td>11-Oct-20</td>
+          <td>9:00am - 12:00pm</td>
+          <td>Zoom</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>MySQL</td>
+          <td>21-Oct-20</td>
+          <td>9:00am - 12:00pm</td>
+          <td>Zoom</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>CSR 1</td>
+          <td>30-Oct-20</td>
+          <td>10:00am - 12:00pm</td>
+          <td>Zoo Negara</td>
           <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
       </tbody>
       <thead class='thead-light'>
@@ -297,7 +152,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th>12</th>
+          <th>13</th>
         </tr>
       </thead>
     </table>
@@ -320,31 +175,31 @@
       <tbody>
         <tr>
           <td>Training 1</td>
-          <td>01-Sep-20</td>
-          <td>10:00am - 12:00pm</td>
+          <td>01-Nov-20</td>
+          <td>9:00am - 12:00pm</td>
           <td>Zoom</td>
           <td>3</td>
         </tr>
         <tr>
+          <td>CSR 2</td>
+          <td>03-Nov-20</td>
+          <td>10:00am - 5:00pm</td>
+          <td>Old Folks</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>Data Science with Python</td>
+          <td>12-Nov-20</td>
+          <td>10:00am - 5:00pm</td>
+          <td>Zoom</td>
           <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
+          <td>Introduction to Python</td>
+          <td>30-Nov-20</td>
+          <td>10:00am - 5:00pm</td>
+          <td>Zoom</td>
           <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
       </tbody>
       <thead class='thead-light'>
@@ -353,7 +208,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th>12</th>
+          <th>14</th>
         </tr>
       </thead>
     </table>
@@ -375,33 +230,13 @@
       </thead>
       <tbody>
         <tr>
-          <td>Training 1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
+          <td>Training Program 4</td>
+          <td>10-Dec-2020</td>
+          <td>03.00pm - 05.00pm</td>
+          <td>Dell Cyberjaya</td>
           <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
-        <tr>
-          <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        
       </tbody>
       <thead class='thead-light'>
         <tr>
@@ -409,7 +244,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th>12</th>
+          <th>2</th>
         </tr>
       </thead>
     </table>

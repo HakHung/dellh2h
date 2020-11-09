@@ -112,7 +112,8 @@
                                                 echo"<div class='progress-bar' style='width:0%; min-width:0px'></div>";
                                             }
                                             else{
-                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$row['Hr']." hours ".$row['Min']." minutes</div>";
+                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$percentage."%</div>";
+                                                // echo "<p>".$row['Hr']." hours ".$row['Min']." minutes</p>";
                                             }
                                         }
                                     }
@@ -164,7 +165,7 @@
                                                 echo"<div class='progress-bar' style='width:0%; min-width:0px'></div>";
                                             }
                                             else{
-                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$row['Hr']." hours ".$row['Min']." minutes</div>";
+                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$percentage."%</div>";
                                             }
                                         }
                                     }
@@ -208,7 +209,7 @@
 
                                     if($result->num_rows>0){
                                         while($row = $result->fetch_assoc()){
-                                            $checkcomplete = 70000 - $row['THour'];
+                                            $checkcomplete = 100000 - $row['THour'];
                                             if ($checkcomplete<=0){
                                                 echo "<h5 class='text-danger'>You have completed the target</h5>";
                                             }

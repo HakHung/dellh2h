@@ -90,7 +90,7 @@
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
                                 echo "<h5 class='card-title'>". $row['eventname'] ."</h5>
-                                <p class='card-text'>". $row['datepicker'] ."</p>
+                                <p class='card-text'>'Date: '". $row['datepicker'] ."</p>
                                 <p class='card-text'>". $row['appt'] . $row['app1'] ."</p>
                                 <p class='card-text'>". $row['app1'] ."</p>
                                 <p class='card-text'>". $row['venue'] ."</p>

@@ -1,12 +1,24 @@
 <?php
-$eventtype = $_POST["eventtype"];
+
 $eventname = filter_input(INPUT_POST, 'eventname');
 $datepicker = filter_input(INPUT_POST, 'datepicker');
 $appt = filter_input(INPUT_POST, 'appt');
 $appt1 = filter_input(INPUT_POST, 'appt1');
 $venue = filter_input(INPUT_POST, 'venue');
 $description = filter_input(INPUT_POST, 'description');
-$compulsory = $_POST["compulsory"];
+
+
+if($_POST["eventtype"] == "Training"){
+    $eventtype = "Training";
+}else{
+    $eventtype = "Volunteering";
+}
+
+if($_POST["compulsory"]== "Yes"){
+    $compulsory = "Yes";
+}else{
+    $compulsory = "No";
+}
 
 if (!empty($eventname || !empty($date))) {
         $host = "localhost";

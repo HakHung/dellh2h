@@ -40,7 +40,7 @@
                     <a class='nav-link' href='training.php'>Events</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='history.html'>History</a>
+                    <a class='nav-link' href='history.php'>History</a>
                 </li>
             </ul>
             <ul class='navbar-nav'>
@@ -88,10 +88,7 @@
                         ORDER BY datepicker ";
         $result = $conn->query($sql);
 
-        // for ($i=1; $i<=12; $i++){
-        //     if ($i == )
-        // }
-
+      
         $date2 = date('m');
 
         $printedmonth = FALSE;

@@ -5,7 +5,7 @@
     $appt = filter_input(INPUT_POST, 'appt');
     $appt1 = filter_input(INPUT_POST, 'appt1');
     $venue = filter_input(INPUT_POST, 'venue');
-    $description = filter_input(INPUT_POST, 'description');
+
 
     if($_POST["eventcategory"] == "Training"){
         $eventcategory = "Training";
@@ -42,7 +42,7 @@
                 die('Connect Error (' . mysqli_connect_errno() . ') '
                     . mysqli_connect_error());
             } else {
-                $sql = "INSERT INTO event_table (eventcategory, eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory) values ('$eventcategory','$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory')";
+                $sql = "INSERT INTO event_table (eventcategory, eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory, contribution) values ('$eventcategory','$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory',(SELECT TIMEDIFF(appt1,appt) FROM event_table))";
                 if ($conn->query($sql)) {
                     echo "New record is inserted sucessfully";
                     include('training.php');

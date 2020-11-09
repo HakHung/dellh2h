@@ -142,8 +142,8 @@
                         ORDER BY datepicker";
                         $result = $conn->query($sql);
 
-                        $sql2 = "UPDATE user_event SET(contribution = SELECT TIMEDIFF(event_table.appt1,event_table.appt) FROM event_table, user_event WHERE event_table.eventid = user_event.eventid)";
-                        $result2 = $conn->query($sql2);
+                        $sql = "UPDATE user_event SET(contribution = SELECT TIMEDIFF(event_table.appt1,event_table.appt) FROM event_table, user_event WHERE event_table.eventid = user_event.eventid)";
+                        $result2 = $conn->query($sql);
 
                         //Create a SQL String
                         

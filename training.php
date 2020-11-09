@@ -83,7 +83,10 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training' ORDER BY datepicker ";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description 
+                        FROM event_table
+                        WHERE datepicker>='$date' AND eventcategory ='training' AND eventid NOT IN (SELECT eventid FROM user_event)
+                        ORDER BY datepicker ";
                         $result = $conn->query($sql);
 
                         // for ($i=1; $i<=12; $i++){

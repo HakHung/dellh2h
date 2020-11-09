@@ -60,8 +60,8 @@
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
                     <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='training.php'>Trainings</a></button>
-                    <button class='btn btn-primary mr-5' type='button'>Events</button>
+                    <button class='btn btn-outline-primary btn-lg mr-5' type='button'><a href='training.php'>Trainings</a></button>
+                    <button class='btn btn-primary btn-lg mr-5' type='button'>Events</button>
 
                     <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
                 </form>
@@ -84,12 +84,11 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description 
+                        FROM event_table 
+                        WHERE datepicker>='$date' AND eventcategory ='other events' AND  eventid NOT IN (SELECT eventid FROM user_event) 
+                        ORDER BY datepicker ";
                         $result = $conn->query($sql);
-
-                        // for ($i=1; $i<=12; $i++){
-                        //     if ($i == )
-                        // }
 
                         $date2 = date('m');
                         

@@ -70,4 +70,3 @@ if ($_POST["compulsory"] == "Yes") {
     } else {
         "Error: " . $sql . "<br>" . $conn->error;
     }
-

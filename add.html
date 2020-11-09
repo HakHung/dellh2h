@@ -58,12 +58,13 @@
                             <div>
                                 <div class='custom-control custom-radio custom-control-inline'>
                                     <input type='radio' id='customRadioInline1' name='eventcategory' value='Training'
-                                        onclick="myMth(1)" class='custom-control-input' checked>
+                                        onclick="myMth(1)" class='custom-control-input' checked required="required">
                                     <label class='custom-control-label' for='customRadioInline1'>Training</label>
                                 </div>
                                 <div class='custom-control custom-radio custom-control-inline'>
                                     <input type='radio' id='customRadioInline2' name='eventcategory'
-                                        value='Other Events' onclick="myMth(2)" class='custom-control-input'>
+                                        value='Other Events' onclick="myMth(2)" class='custom-control-input'
+                                        required="required">
                                     <label class='custom-control-label' for='customRadioInline2'>Other Events</label>
                                 </div>
                             </div>
@@ -74,25 +75,25 @@
                                 <div id="demo">
                                     <div class='custom-control custom-radio custom-control-inline'>
                                         <input type='radio' id='customRadioInline1.1' name='eventtype' value='Workshop'
-                                            class='custom-control-input'>
+                                            class='custom-control-input' required="required">
                                         <label class='custom-control-label' for='customRadioInline1.1'>Workshop</label>
                                     </div>
                                     <div class='custom-control custom-radio custom-control-inline'>
-                                        <input type='radio' id='customRadioInline1.2' name='eventtype'
-                                            value='Webminar' class='custom-control-input'>
+                                        <input type='radio' id='customRadioInline1.2' name='eventtype' value='Webminar'
+                                            class='custom-control-input' required="required">
                                         <label class='custom-control-label' for='customRadioInline1.2'>Webminar</label>
                                     </div>
                                 </div>
                                 <div id="demo1" style="display:none">
                                     <div class='custom-control custom-radio custom-control-inline'>
                                         <input type='radio' id='customRadioInline2.1' name='eventtype'
-                                            value='Team Building' class='custom-control-input'>
+                                            value='Team Building' class='custom-control-input' required="required">
                                         <label class='custom-control-label' for='customRadioInline2.1'>Team
                                             Building</label>
                                     </div>
                                     <div class='custom-control custom-radio custom-control-inline'>
                                         <input type='radio' id='customRadioInline2.2' name='eventtype'
-                                            value='Volunteering' class='custom-control-input'>
+                                            value='Volunteering' class='custom-control-input' required="required">
                                         <label class='custom-control-label'
                                             for='customRadioInline2.2'>Volunteering</label>
                                     </div>
@@ -104,12 +105,12 @@
                             <div>
                                 <div class='custom-control custom-radio custom-control-inline'>
                                     <input type='radio' id='customRadioInline3' name='compulsory' value='Yes'
-                                        class='custom-control-input'>
+                                        class='custom-control-input' required="required">
                                     <label class='custom-control-label' for='customRadioInline3'>Yes</label>
                                 </div>
                                 <div class='custom-control custom-radio custom-control-inline'>
                                     <input type='radio' id='customRadioInline4' name='compulsory' value='No'
-                                        class='custom-control-input'>
+                                        class='custom-control-input' required="required">
                                     <label class='custom-control-label' for='customRadioInline4'>No</label>
                                 </div>
                             </div>
@@ -117,7 +118,7 @@
 
                         <div class='form-group'>
                             <label for='eventname' style='color:#135788;'>Event name</label>
-                            <input class='form-control' type='text' id='eventname' name='eventname'>
+                            <input class='form-control' type='text' id='eventname' name='eventname' required="required">
                         </div>
 
                         <div class='form-group'>
@@ -131,27 +132,28 @@
                         <div class='form-row'>
                             <div class='form-group col-md-4'>
                                 <label for='datepicker' style='color:#135788;'>Date</label>
-                                <input class='form-control' type='date' id='datepicker' name='datepicker'>
+                                <input class='form-control' type='date' id='datepicker' name='datepicker'
+                                    required="required">
                             </div>
                             <div class='form-group col-md-4'>
                                 <label for='appt' style='color:#135788;'>Starting Time</label>
-                                <input class='form-control' type='time' id='appt' name='appt'>
+                                <input class='form-control' type='time' id='appt' name='appt' required="required">
                             </div>
                             <div class='form-group col-md-4'>
                                 <label for='appt1' style='color:#135788;'>Ending Time</label>
-                                <input class='form-control' type='time' id='appt1' name='appt1'>
+                                <input class='form-control' type='time' id='appt1' name='appt1' required="required">
                             </div>
                         </div>
 
                         <div class='form-group'>
                             <label for='venue' style='color:#135788;'>Venue</label>
-                            <input class='form-control' type='text' id='venue' name='venue'>
+                            <input class='form-control' type='text' id='venue' name='venue' required="required">
                         </div>
                         <div class='form-group'>
                             <label for='description' style='color:#135788;'>Event Description</label>
                             <textarea class="form-control" id="description" name='description' rows="3"></textarea>
                         </div>
-                        <button type='submit' class='btn btn-primary'>Save Changes onclick="training.php"</button>
+                        <button type='submit' class='btn btn-primary' onclick="training.php">Save Changes</button>
                     </form>
                 </div>
             </div>
@@ -165,13 +167,26 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
 
+            $(function () {
+                var dtToday = new Date();
+
+                var month = dtToday.getMonth() + 1;
+                var day = dtToday.getDate() + 1;
+                var year = dtToday.getFullYear();
+                if (month < 10)
+                    month = '0' + month.toString();
+                if (day < 10)
+                    day = '0' + day.toString();
+                var maxDate = year + '-' + month + '-' + day;
+                $('#datepicker').attr('min', maxDate);
+            });
             function myMth(id) {
-                var parentDiv = document.getElementById("demo");  
-                var parentDiv1 = document.getElementById("demo1");  
+                var parentDiv = document.getElementById("demo");
+                var parentDiv1 = document.getElementById("demo1");
                 if (id == 1) {
                     parentDiv.style.display = "block";
                     parentDiv1.style.display = "none";
-                }else{
+                } else {
                     parentDiv.style.display = "none";
                     parentDiv1.style.display = "block";
                 }

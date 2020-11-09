@@ -32,7 +32,7 @@
                     <a class='nav-link' href='index.html'>Home</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='learningpath.php'>Events</a>
+                    <a class='nav-link' href='training.php'>Events</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='history.html'>History</a>
@@ -53,7 +53,7 @@
         <!-- <div class='row'> -->
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Learning path</a></button>
+                    <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
                     <button class='btn btn-primary mr-5' type='button'>Trainings</button>
                     <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Events</a></button>
 
@@ -87,13 +87,16 @@
                             while($row = $result->fetch_assoc()){
                                 echo "
                                 
-                                <div class='card mx-5' style='width: 18rem;'>
+                                <div class='card mx-3' style='width: 18rem;'>
                                 <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
                                 <h5 class='card-title'>". $row['eventname'] ."</h5>
                                 <p class='card-text'> Date: ". $row['datepicker'] ."</p>
                                 <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
                                 <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                <div><a href='details.html' class='btn btn-info'>View Info!</a>
                                 <a href='#' class='btn btn-primary'>Register Now!</a>
+                                </div>
+                                
                                 </div>";
                             }
                         }

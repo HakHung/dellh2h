@@ -22,8 +22,7 @@ if (mysqli_connect_error()) {
         include('details.html');
 
     } else {
-        echo "Error: " . $sql . "
-" . $conn->error;
+        "Error: " . $sql . "<br>" . $conn->error;
     }
-    $conn->close();
 }
+$conn->close();

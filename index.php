@@ -135,19 +135,24 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt ,event_table.appt1, event_table.venue,event_table.compulsory, 
-                        TIMEDIFF(event_table.appt1,event_table.appt) AS contribution
-                        FROM event_table, user_event
-                        WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid
-                        ORDER BY datepicker";
-                        $result = $conn->query($sql);
-
-                        $sql = "UPDATE user_event SET(contribution = SELECT TIMEDIFF(event_table.appt1,event_table.appt) FROM event_table, user_event WHERE event_table.eventid = user_event.eventid)";
+                        $sql = "SELECT TIMEDIFF(event_table.appt1,event_table.appt) AS time1, eventid FROM event_table";
                         $result2 = $conn->query($sql);
 
                         //Create a SQL String
+                        if($result2->num_rows>0){
+                            while($row = $result2->fetch_assoc()){
+
+                                $sql = "UPDATE user_event SET contribution='".$row['time1']."' WHERE eventid = ".$row['eventid']." AND userid=1";
+                                $conn->query($sql);
+                            } 
+                        }
                         
-                        
+                        $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt ,event_table.appt1, event_table.venue,event_table.compulsory, user_event.contribution
+                        FROM event_table, user_event
+                        WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                        ORDER BY datepicker";
+                        $result = $conn->query($sql);                     
+
 
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
@@ -162,7 +167,9 @@
                                             <p>Date: ". $row['datepicker'] ."<br>
                                                 Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
                                                 Venue: ". $row['venue'] ."<br>
-                                                Contribution hour: ". substr($row['contribution'],0, 2) ."hours ". substr($row['contribution'],3, 2) ."minutes<br>
+                                                // Contribution hour: ". substr($row['contribution'],0, 2) ."hours ". substr($row['contribution'],3, 2) ."minutes<br>
+                                                Contribution hour: ". $row['contribution']."<br>
+
                                             </p>";
 
                                             if ($row['compulsory'] == "Yes") {

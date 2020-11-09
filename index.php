@@ -135,10 +135,11 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT event_table.eventname, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.description 
+                        $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.compulsory 
                         FROM event_table, user_event
                         WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid
                         ORDER BY datepicker ";
+                        $contribute = "SELECT TIMEDIFF(SELECT appt1 FROM event_table, SELECT appt FROM event_table)";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
@@ -148,8 +149,8 @@
                                 <div class='col-md-12 mb-3'>
                                     <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
                                         <div class='card-header'>
-                                            <h5 class='card-title'>Training Program 1</h5>
-                                            <h6 class='class-subtitle'>Webminar</h6>
+                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                            <h6 class='class-subtitle'>". $row['eventtype'] ."</h6>
                                         </div>
                                         <div class='card-body'>
                                             <p>Date: ". $row['datepicker'] ."<br>

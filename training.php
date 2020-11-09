@@ -60,8 +60,8 @@
         <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
             <form class='form-inline '>
                 <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
-                <button class='btn btn-primary mr-5' type='button'>Trainings</button>
-                <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Events</a></button>
+                <button class='btn btn-primary btn-lg mr-5' type='button'>Trainings</button>
+                <button class='btn btn-outline-primary btn-lg mr-5' type='button'><a href='otherevents.php'>Events</a></button>
 
                 <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
             </form>

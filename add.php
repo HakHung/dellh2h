@@ -44,7 +44,14 @@ if ($_POST["compulsory"] == "Yes") {
 
     $sql = "INSERT INTO event_table (eventcategory, eventtype, eventname, datepicker, appt, appt1, venue, description, compulsory) values ('$eventcategory','$eventtype', '$eventname','$datepicker', '$appt', '$appt1', '$venue', '$description', '$compulsory')";
     if ($conn->query($sql)) {
-        echo "New record is inserted sucessfully";
+        // echo "New record is inserted sucessfully";
+        // $sql = "SELECT TIMEDIFF(appt1,appt) AS inter FROM event_table";
+
+        // $result = $conn->query($sql);
+        // while($row = $result ->fetch_array()){
+        //     echo $row['inter'] ;
+        //     echo "    ";
+        // }
         if($compulsory=="Yes"){
             $sql = "SELECT MAX(eventid) AS max_eventid FROM event_table";  //  get the eventID of newly inserted
             $eventIdLatest = $conn->query($sql);

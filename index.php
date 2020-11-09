@@ -143,19 +143,20 @@
                             while($row = $result->fetch_assoc()){
                                 echo "
                                 <div class='col-md-12'>
-                                    <div class='card m-1'>
+                                    <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
                                         <div class='card-header'>
                                             <h5 class='card-title'>Training Program 1</h5>
                                             <h6 class='class-subtitle'>Webminar</h6>
                                         </div>
                                         <div class='card-body'>
-                                            <p>Date: ". $row['eventname'] ."<br>
+                                            <p>Date: ". $row['datepicker'] ."<br>
                                                 Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
                                                 Venue: ". $row['venue'] ."<br>
                                                 Contribution hour: 2hours
                                             </p>
                                             <span class='badge badge-info float-right'>Optional</span>
                                         </div>
+                                        </a>
                                     </div>
                                 </div>";
                             }
@@ -165,127 +166,107 @@
                         }
                         $conn->close();
                     ?>
-
-                    
-
-                    <!-- <div class="col-md-12">
-                        <div class="card ">
-                            <div class="card-header">
-                                <h5 class="card-title">Training Program 1</h5>
-                                <h6 class='class-subtitle'>Webminar</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoom<br>
-                                    Contribution hour: 2hours</p>
-                                <span class="badge badge-danger float-right">Required</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="card m-1">
-                            <div class="card-header">
-                                <h5 class="card-title">Training Program 1</h5>
-                                <h6 class='class-subtitle'>Webminar</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoom<br>
-                                    Contribution hour: 2hours</p>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
-            <div class="col-md-4 m-2 ">
 
-                <div class="row">
-                    <img src="schedule.png" class="rounded-circle" alt="schedule" width="100">
-                    <h3>Event Schedule</h3>
+                    <div class="col-md-4 m-2 ">
 
+                        <div class="row">
+                            <img src="schedule.png" class="rounded-circle" alt="schedule" width="100">
+                            <h3>Event Schedule</h3>  
+                            <?php
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "delldb";
+                            
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+                            
+                                if($conn->connect_error){
+                                    die("Connection failed: " .$conn->connect_error);
+                                }
 
-                    <div class="col-md-12">
-                        <div class="card m-1">
-                            <div class="card-header">
-                                <h5 class="card-title">CSR 1</h5>
-                                <h6 class='class-subtitle'>Volunteering</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoo Negara<br>
-                                    Contribution hour: 2hours</p>
-                            </div>
+                                date_default_timezone_set("Asia/Kuala_Lumpur");
+                                $date = date('Y-m-d');
+
+                                $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
+                                $result = $conn->query($sql);
+
+                                // IMPORTANT!! php code use ', html code use ''
+                                if($result->num_rows>0){
+                                    while($row = $result->fetch_assoc()){
+                                        echo "
+                                        <div class='col-md-12'>
+                                            <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
+                                                <div class='card-header'>
+                                                    <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                                    <h6 class='class-subtitle'>Volunteering</h6>
+                                                </div>
+                                            <div class='card-body'>
+                                            <p>Date: ". $row['datepicker'] ."<br>
+                                                    Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
+                                                    Venue: ". $row['venue'] ."<br>
+                                                    Contribution hour: 2hours
+                                                </p>
+                                            </div>
+                                            </a>
+                                        </div>
+                                    </div>";
+                                    }
+                                }
+                                else{
+                                    echo '<p>No events to show</p>';
+                                }
+                                $conn->close();
+                            ?>                        
+                            
                         </div>
-
                     </div>
-                    <div class="col-md-12">
-                        <div class="card m-1">
-                            <div class="card-header">
-                                <h5 class="card-title">CSR 1</h5>
-                                <h6 class='class-subtitle'>Volunteering</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoo Negara<br>
-                                    Contribution hour: 2hours</p>
-                            </div>
+
+
+                    <div class="col-md-3 my-3 m-2 ">
+                        <div class="row">
+                            <img src="event.png" class="rounded-circle" alt="Profile Picture" width="100">
+                            <h6>Recomended Event</h6>
                         </div>
+                        <?php
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "delldb";
+                            
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+                            
+                                if($conn->connect_error){
+                                    die("Connection failed: " .$conn->connect_error);
+                                }
 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card m-1">
-                            <div class="card-header">
-                                <h5 class="card-title">CSR 1</h5>
-                                <h6 class='class-subtitle'>Volunteering</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: 10-Nov-2020 (Tuesday)<br>
-                                    Time: 10:00am - 12:00pm <br>
-                                    Venue: Zoo Negara<br>
-                                    Contribution hour: 2hours</p>
-                            </div>
-                        </div>
+                                date_default_timezone_set("Asia/Kuala_Lumpur");
+                                $date = date('Y-m-d');
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 my-3 m-2 ">
-                <div class="row">
-                    <img src="event.png" class="rounded-circle" alt="Profile Picture" width="100">
-                    <h6>Recomended Event</h6>
-                </div>
-                <div class='card m-2' style='width: 20rem;'>
-                    <img src='https://images.pexels.com/photos/5475757/pexels-photo-5475757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    ' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                        <h5 class="card-title">CSR 1</h5>
-                        <h6 class='class-subtitle'>Volunteering</h6>
-                    </div>
-                </div>
+                                $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' ORDER BY datepicker ";
+                                $result = $conn->query($sql);
 
-
-                <div class='card m-2' style='width: 20rem;'>
-                    <img src='https://images.pexels.com/photos/50711/board-electronics-computer-data-processing-50711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                        <h5 class="card-title">CSR 1</h5>
-                        <h6 class='class-subtitle'>Volunteering</h6>
+                                // IMPORTANT!! php code use ', html code use ''
+                                if($result->num_rows>0){
+                                    while($row = $result->fetch_assoc()){
+                                        echo "
+                                        <div class='card m-2' style='width: 20rem;'><a href='details.html' style='text-decoration:none; color:black'>
+                                        <img src='https://images.pexels.com/photos/5475757/pexels-photo-5475757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                                        ' class='card-img-top' alt='...'>
+                                        <div class='card-body'>
+                                            <h5 class='card-title'>". $row['eventname'] ."</h5>
+                                            <h6 class='class-subtitle'>Volunteering</h6>
+                                        </div>
+                                        </a></div>";
+                                    }
+                                }
+                                else{
+                                    echo '<p>No events to show</p>';
+                                }
+                                $conn->close();
+                            ?>
                     </div>
-                </div>
-                <div class='card m-2' style='width: 20rem;'>
-                    <img src='https://images.pexels.com/photos/4960396/pexels-photo-4960396.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                        <h5 class="card-title">CSR 1</h5>
-                        <h6 class='class-subtitle'>Volunteering</h6>
-                    </div>
-                </div>
-            </div> -->
 </body>
 
 </html>

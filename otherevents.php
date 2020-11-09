@@ -17,11 +17,17 @@
             height: 1000px;
         }
     </style>
+    <script>
+        function myFunction() {
+            alert("Successfully Sign Up to this event!");            
+            document.getElementById("register").style.visibility="hidden";         
+        } 
+    </script>
 </head>
 
 <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-        <a class='navbar-brand' href='index.html'>ITDP</a>
+        <a class='navbar-brand' href='index.php'>ITDP</a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
             aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
@@ -29,7 +35,7 @@
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul class='navbar-nav mr-auto'>
                 <li class='nav-item active'>
-                    <a class='nav-link' href='index.html'>Home</a>
+                    <a class='nav-link' href='index.php'>Home</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='training.php'>Events</a>
@@ -79,16 +85,21 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events'";
+                        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events' ORDER BY datepicker ";
                         $result = $conn->query($sql);
+
+                        // for ($i=1; $i<=12; $i++){
+                        //     if ($i == )
+                        // }
 
                         // IMPORTANT!! php code use ', html code use ''
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
+                                $month = date("m",strtotime($row['datepicker']));                               
+
                                 echo "
-                                
                                 <div class='card mx-5' style='width: 18rem;'>
-                                <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
+                                <img src='https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class='card-img-top' alt='...'>
                                 <div class='mx-4 my-4'>
                                 <h5 class='card-title'>". $row['eventname'] ."</h5>
                                 <p class='card-text'> Date: ". $row['datepicker'] ."</p>
@@ -96,7 +107,7 @@
                                 <p class='card-text'>Venue: ". $row['venue'] ."</p>
                                 </div>
                                 <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
-                                <a href='#' class='btn btn-primary'>Register Now!</a>
+                                <a href='#' id='register' onclick='myFunction()' class='btn btn-primary'>Register Now!</a>
                                 </div>
                                 </div>";
                             }
@@ -107,8 +118,6 @@
                         $conn->close();
                     ?>
             </div>
-
-        
 
     </div>
     </div>

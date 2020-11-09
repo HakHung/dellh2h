@@ -48,26 +48,23 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid my-3">
+    <div class="container-fluid" style="padding-left: 5%; padding-right: 5%;  margin:20px;">
         <div class="row">
-            <div class="col-xs-9 col-md-2 col-lg-2">
-                <img src="profile.png" class="rounded-circle" alt="Profile Picture" width="100">
-            </div>
-            <div class="col-sm-3 col-md-3 col-xs-12">
-                <h5>Welcome! Katie Belles</h5>
-            </div>
+            <!-- <div class="col-sm-12 col-md-12 col-xs-12"> -->
+                <h5><img src="profile.png" class="rounded-circle" alt="Profile Picture" width="100" style="padding:0px 10px;">Welcome! Katie Belles</h5>
+            <!-- </div> -->
         </div>
     </div>
 
     
 
-    <div class="container-fluid border border-info">
+    <div class="container-fluid " style="padding-left: 5%; padding-right: 5%;">
         <div class="alert alert-danger text-center">
             <strong>IMPORTANT ANNOUNCEMENT!!</strong><br>WORK FROM HOME (WFH) Effective from 27th October - 9th
             November 2020
         </div>
         
-        <div class='container'>
+        <div class='container-fluid'>
             <h4><b> 2nd Quarter (Oct - Dec)</b></h4>
             <div class="row">
                 <div class="col-md-4">
@@ -83,15 +80,19 @@
                                     $dbname = "delldb";
                                 
                                     $conn = new mysqli($servername, $username, $password, $dbname);
+                                    
                                 
                                     if($conn->connect_error){
                                         die("Connection failed: " .$conn->connect_error);
                                     }
 
+                                    date_default_timezone_set("Asia/Kuala_Lumpur");
+                                    $date = date('Y-m-d');
+
                                     $sql = "SELECT SUM(user_event.contribution) AS THour, HOUR(SUM(user_event.contribution)) AS Hr, MINUTE(SUM(user_event.contribution)) AS Min
                                             FROM event_table, user_event
-                                            WHERE event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
-                                            ORDER BY datepicker";
+                                            WHERE event_table.datepicker<='$date' AND event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                                            ORDER BY event_table.datepicker";
                                     
                                     $result = $conn->query($sql);                    
 
@@ -135,10 +136,12 @@
                                     if($conn->connect_error){
                                         die("Connection failed: " .$conn->connect_error);
                                     }
-
+                                    
+                                    date_default_timezone_set("Asia/Kuala_Lumpur");
+                                    $date = date('Y-m-d');
                                     $sql = "SELECT SUM(user_event.contribution) AS THour, HOUR(SUM(user_event.contribution)) AS Hr, MINUTE(SUM(user_event.contribution)) AS Min
                                             FROM event_table, user_event
-                                            WHERE event_table.eventcategory ='other events' AND event_table.eventid = user_event.eventid AND userid=1
+                                            WHERE  event_table.datepicker<='$date' AND event_table.eventcategory ='other events' AND event_table.eventid = user_event.eventid AND userid=1
                                             ORDER BY datepicker";
                                     
                                     $result = $conn->query($sql);                    
@@ -188,18 +191,26 @@
                                         die("Connection failed: " .$conn->connect_error);
                                     }
 
-                                    $sql = "SELECT HOUR(TIMEDIFF('100000', SUM(user_event.contribution))) AS Hr, MINUTE(TIMEDIFF('100000', SUM(user_event.contribution))) AS Min
+                                    date_default_timezone_set("Asia/Kuala_Lumpur");
+                                    $date = date('Y-m-d');
+
+                                    $sql = "SELECT SUM(user_event.contribution) AS THour, HOUR(TIMEDIFF('100000', SUM(user_event.contribution))) AS Hr, MINUTE(TIMEDIFF('100000', SUM(user_event.contribution))) AS Min
                                             FROM event_table, user_event
-                                            WHERE event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                                            WHERE event_table.datepicker<='$date' AND event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
                                             ORDER BY datepicker";
                                     
                                     $result = $conn->query($sql);                    
 
                                     if($result->num_rows>0){
                                         while($row = $result->fetch_assoc()){
-                                            // $percentage = $row['THour']/100000*100;
+                                            $checkcomplete = 70000 - $row['THour'];
+                                            if ($checkcomplete<=0){
+                                                echo "<h5 class='text-danger'>You have completed the target</h5>";
+                                            }
+                                            else{
+                                                echo"<h5>".$row['Hr']." hours ".$row['Min']." minutes </h5>";
+                                            }
                                             
-                                            echo"<h5>".$row['Hr']." hours ".$row['Min']." minutes </h5>";
                                             
                                         }
                                     }
@@ -216,7 +227,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
         <div class="row">
             <div class="col-md-4 m-2">
 
@@ -288,7 +299,10 @@
                             }
                         }
                         else{
-                            echo '<p>No events to show</p>';
+                            echo "<div class='col-md-12 mb-3'>
+                            <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
+                            <div class='card-body'>
+                            <p>No Events Yet</p></div></div></div>";
                         }
                         $conn->close();
                     ?>
@@ -300,7 +314,6 @@
                         <div class="row">
                             
                             <h3><img src="schedule.png" class="rounded-circle" alt="schedule" height="90" style="vertical-align: middle">Event Schedule</h3>  
-<<<<<<< HEAD
                             <?php
                         $servername = "localhost";
                         $username = "root";
@@ -365,14 +378,13 @@
                             }
                         }
                         else{
-                            echo '<p>No events to show</p>';
+                            echo "<div class='col-md-12 mb-3'>
+                            <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
+                            <div class='card-body'>
+                            <p>No Events Yet</p></div></div></div>";
                         }
                         $conn->close();
                     ?>
-=======
-                                
-                            
->>>>>>> c77366d0056d1d2fa26876fb7c1e09842bcb3414
                         </div>
                     </div>
 

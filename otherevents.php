@@ -105,12 +105,12 @@
                                 
                                 while($row = $result->fetch_assoc()){ 
                                     $month = date("m",strtotime($row['datepicker'])); 
-                                    // echo "<h1>". $month ."</h1>";                                                                         
+                                    $year = date("Y", strtotime($row['datepicker']));
                                     if ($month == $i){
                                         $monthName = date('F', mktime(0, 0, 0, $month, 10));
                                         if($printedmonth == FALSE){
                                             $printedmonth=TRUE;
-                                            echo "<div class='card-body'><h1>". $monthName ."</h1>";
+                                            echo "<div class='card-body'><h1>". $monthName. " " .$year. "</h1>";
                                             echo "<div class='row'>";                 
                                         }
                                                                        

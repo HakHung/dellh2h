@@ -14,7 +14,7 @@
 
 <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-        <a class='navbar-brand' href='#'>ITDP</a>
+        <a class='navbar-brand' href='index.html'>ITDP</a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
             aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
@@ -33,8 +33,9 @@
             </ul>
             <ul class='navbar-nav'>
                 <li class='nav-item active text-right'>
-                    <a class='nav-link' href='#'>Xuan<br><span style="font-size: 9px; color: white;">Project
-                            Manager</span></a>
+                    <!-- <a class='nav-link' href='#'>Xuan<br><span style="font-size: 9px; color: white;">Project
+                            Manager</span></a> -->
+                    <a class='nav-link' href='#'>Xuan</a>
                     <!-- <span style="font-size: 9px; color: white;">Project Manager</span> -->
                 </li>
                 <li class='nav-item active'>
@@ -55,10 +56,19 @@
         <div class="row">
 
             <div class="col-md-5">
-                <img class="img-fluid" src="https://images.pexels.com/photos/5475757/pexels-photo-5475757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                <div class="container my-3">
-                    <button onclick="myFunction()" type='submit' class='btn btn-primary'>Register Now!</button>
-                </div>
+                <<<<<<< HEAD <img class="img-fluid"
+                    src="https://images.pexels.com/photos/5475757/pexels-photo-5475757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    alt="">
+                    <div class="container my-3">
+                        <button onclick="myFunction()" type='submit' class='btn btn-primary'>Register Now!</button>
+                    </div>
+                    =======
+                    <img class="img-fluid" src="http://placehold.it/400x300" alt="">
+                    <form class="container my-3">
+                        <input id="register" onclick="return myFunction()" type='button' class='btn btn-primary'
+                            value="Register Now!">
+                    </form>
+                    >>>>>>> a0573ed46fff384c69de5688114841436aa15512
             </div>
 
             <div class="col-md-7">
@@ -110,7 +120,7 @@
                             guided me at each step and enabled me to centralise my work and have control on all aspect
                             of my online business.
                         </p>
-                        
+
                     </div>
                     <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                         <div class="px-4 pt-3"> <a href="javascript:void(0)"
@@ -128,8 +138,10 @@
     </div>
     <script>
         function myFunction() {
+
             alert("Successfully Sign Up to this event!");
-            button.style.visibility = "hidden";
+            document.getElementById("register").style.visibility = "hidden";
+
         } 
     </script>
 </body>

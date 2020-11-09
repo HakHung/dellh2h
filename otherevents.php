@@ -21,7 +21,7 @@
 
 <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-        <a class='navbar-brand' href='#'>ITDP</a>
+        <a class='navbar-brand' href='index.html'>ITDP</a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
             aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
@@ -53,7 +53,7 @@
         <!-- <div class='row'> -->
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button>
+                    <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
                     <button class='btn btn-outline-primary mr-5' type='button'><a href='training.php'>Trainings</a></button>
                     <button class='btn btn-primary mr-5' type='button'>Events</button>
 

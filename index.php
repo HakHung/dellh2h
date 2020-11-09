@@ -135,6 +135,14 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
+                        // $sql = "SELECT userid FROM usertable";
+                        // $alluser =  $conn->query($sql);
+                        // while($row = $alluser->fetch_assoc()){
+                        //     $sql = "SELECT event_table.eventid FROM event_table, user_event WHERE event_table.compulsory = 'Yes' AND event_table.eventid NOT IN user_event.eventid";
+                        //     $result1 = $conn->query($sql);
+                        //     $sql = "INSERT INTO user_event(userid, eventid) values ('$alluser','$result1')";
+                        // }
+
                         $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.compulsory 
                         FROM event_table, user_event
                         WHERE datepicker>='$date' AND eventcategory ='training' AND event_table.eventid = user_event.eventid

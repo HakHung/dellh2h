@@ -22,8 +22,7 @@
 <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
         <a class='navbar-brand' href='index.html'>ITDP</a>
-        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
-            aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -51,67 +50,66 @@
 
     <div class='container-fluid'>
         <!-- <div class='row'> -->
-            <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
-                <form class='form-inline '>
-                    <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
-                    <button class='btn btn-primary mr-5' type='button'>Trainings</button>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Events</a></button>
+        <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
+            <form class='form-inline '>
+                <!-- <button class='btn btn-outline-primary mr-5' type='button'><a href='learningpath.php'>Learning path</a></button> -->
+                <button class='btn btn-primary mr-5' type='button'>Trainings</button>
+                <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Events</a></button>
 
-                    <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
-                </form>
-            </nav>
+                <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
+            </form>
+        </nav>
         <!-- </div> -->
 
         <div class='card-body'>
             <div class="row">
-            <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "delldb";
-                    
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                    
-                        if($conn->connect_error){
-                            die("Connection failed: " .$conn->connect_error);
-                        }
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "delldb";
 
-                        date_default_timezone_set("Asia/Kuala_Lumpur");
-                        $date = date('Y-m-d');
+                $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training'";
-                        $result = $conn->query($sql);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
 
-                        // IMPORTANT!! php code use ', html code use ''
-                        if($result->num_rows>0){
-                            while($row = $result->fetch_assoc()){
-                                echo "
+                date_default_timezone_set("Asia/Kuala_Lumpur");
+                $date = date('Y-m-d');
+
+                $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='training'";
+                $result = $conn->query($sql);
+
+                // IMPORTANT!! php code use ', html code use ''
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
                                 <div class='card mx-5' style='width: 18rem;'>
                                 <img src='http://placehold.it/280x180' class='card-img-top' alt='...'>
                                 <div class='mx-4 my-4'>
-                                <h5 class='card-title'>". $row['eventname'] ."</h5>
-                                <p class='card-text'> Date: ". $row['datepicker'] ."</p>
-                                <p class='card-text'> Time: ". $row['appt']." - ". $row['appt1'] ."</p>
-                                <p class='card-text'>Venue: ". $row['venue'] ."</p>
+                                <h5 class='card-title'>" . $row['eventname'] . "</h5>
+                                <p class='card-text'> Date: " . $row['datepicker'] . "</p>
+                                <p class='card-text'> Time: " . $row['appt'] . " - " . $row['appt1'] . "</p>
+                                <p class='card-text'>Venue: " . $row['venue'] . "</p>
                                 </div>
                                 <div class='text-center mb-3'><a href='details.html' class='btn btn-info'>View Info!</a>
                                 <a href='#' class='btn btn-primary'>Register Now!</a>
                                 </div>
                                 </div>";
-                            }
-                        }
-                        else{
-                            echo '<p>No events to show</p>';
-                        }
-                        $conn->close();
-                    ?>
+                    }
+                } else {
+                    echo '<p>No events to show</p>';
+                }
+                $conn->close();
+                ?>
             </div>
 
-        
 
+
+        </div>
     </div>
-    </div>
-  
+
 
 </body>
 

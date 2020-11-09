@@ -48,13 +48,13 @@ if (!empty($eventname || !empty($date))) {
                 include('training.php');
 
             } else {
-                echo "Error: " . $sql . "
-" . $conn->error;
+                echo "Error: " . $sql . 
+                $conn->error;
             }
-            $conn->close();
         }
 
 } else {
     echo "Event name should not be empty";
     die();
 }
+

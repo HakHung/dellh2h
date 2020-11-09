@@ -57,9 +57,9 @@
 
             <div class="col-md-5">
                 <img class="img-fluid" src="http://placehold.it/400x300" alt="">
-                <div class="container my-3">
-                    <button onclick="myFunction()" type='submit' class='btn btn-primary'>Register Now!</button>
-                </div>
+                <form class="container my-3" >
+                    <input id="register" onclick="return myFunction()" type='button' class='btn btn-primary' value="Register Now!">
+                </form>
             </div>
 
             <div class="col-md-7">
@@ -130,8 +130,8 @@
     </div>
     <script>
         function myFunction() {
-            alert("Successfully Sign Up to this event!");
-            button.style.visibility ="hidden";
+            alert("Successfully Sign Up to this event!");            
+            document.getElementById("register").style.visibility="hidden";         
         } 
     </script>
 </body>

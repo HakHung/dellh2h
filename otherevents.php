@@ -4,7 +4,7 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-    <title>Learning Path</title>
+    <title>Other Events</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
     <link rel='stylesheet' href='css/bootstrap.min.css'>
     <link rel='stylesheet' href='css/style.css'>
@@ -49,16 +49,13 @@
         </div>
     </nav>
 
-
     <div class='container-fluid'>
         <!-- <div class='row'> -->
             <nav class='navbar navbar-expand-lg navbar-light my-5 mx-5'>
                 <form class='form-inline '>
-                    <button class='btn btn-primary mr-5' type='button'>Learning path</button>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a
-                            href='training.php'>Trainings</a></button>
-                    <button class='btn btn-outline-primary mr-5' type='button'><a
-                            href='otherevents.php'>Events</a></button>
+                    <button class='btn btn-outline-primary mr-5' type='button'><a href='otherevents.php'>Learning path</a></button>
+                    <button class='btn btn-outline-primary mr-5' type='button'><a href='training.php'>Trainings</a></button>
+                    <button class='btn btn-primary mr-5' type='button'>Events</button>
 
                     <!-- <button class='btn btn-sm btn-outline-secondary' type='button'>Smaller button</button> -->
                 </form>
@@ -82,7 +79,7 @@
                         date_default_timezone_set("Asia/Kuala_Lumpur");
                         $date = date('Y-m-d');
 
-                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='learning path'";
+                        $sql = "SELECT eventname,datepicker,appt,appt1,venue,description FROM event_table WHERE datepicker>='$date' AND eventcategory ='other events'";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
@@ -111,10 +108,7 @@
 
     </div>
     </div>
-
-    
-
-
+  
 
 </body>
 

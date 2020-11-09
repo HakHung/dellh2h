@@ -41,7 +41,7 @@
                     <a class='nav-link' href='training.php'>Events</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='history.html'>History</a>
+                    <a class='nav-link' href='history.php'>History</a>
                 </li>
             </ul>
             <ul class='navbar-nav'>

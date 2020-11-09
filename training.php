@@ -41,7 +41,7 @@
                     <a class='nav-link' href='training.php'>Events</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='history.html'>History</a>
+                    <a class='nav-link' href='history.php'>History</a>
                 </li>
             </ul>
             <ul class='navbar-nav'>
@@ -69,15 +69,49 @@
         <!-- </div> -->
 
         <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "delldb";
-                    
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                    
-                        if($conn->connect_error){
-                            die("Connection failed: " .$conn->connect_error);
+        $host = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "delldb";
+
+        $conn = new mysqli($host, $username, $password, $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date('Y-m-d');
+
+        $sql = "SELECT eventid, eventname,datepicker,appt,appt1,venue,description 
+                        FROM event_table
+                        WHERE datepicker>='$date' AND eventcategory ='training' AND eventid NOT IN (SELECT eventid FROM user_event)
+                        ORDER BY datepicker ";
+        $result = $conn->query($sql);
+
+      
+        $date2 = date('m');
+
+        $printedmonth = FALSE;
+        $count = 1;
+        for ($i = $date2; $count < 12; $i++, $count++) {
+            $printedmonth = FALSE;
+            if ($i == 12) {
+                $i = 1;
+            }
+
+            if ($result->num_rows > 0) {
+                $result->data_seek(0);
+
+                while ($row = $result->fetch_assoc()) {
+                    $month = date("m", strtotime($row['datepicker']));
+                    // echo "<h1>". $month ."</h1>";                                                                         
+                    if ($month == $i) {
+                        if ($printedmonth == FALSE) {
+                            $monthName = date('F', mktime(0, 0, 0, $month, 10));
+                            $printedmonth = TRUE;
+                            echo "<div class='card-body'><h1>" . $monthName . "</h1>";
+                            echo "<div class='row'>";
                         }
 
                         date_default_timezone_set("Asia/Kuala_Lumpur");

@@ -16,7 +16,7 @@ if (mysqli_connect_error()) {
     die('Connect Error (' . mysqli_connect_errno() . ') '
         . mysqli_connect_error());
 } else {
-    $sql = "INSERT INTO user_table (userid, username, eventid, contribute) values ('$userid','$username', '$eventid','$contribute')";
+    $sql = "INSERT INTO userevent (userid, username, eventid, contribute) values ('$userid','$username', '$eventid','$contribute')";
     if ($conn->query($sql)) {
         echo "New record is inserted sucessfully";
         include('details.html');

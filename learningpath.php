@@ -77,7 +77,7 @@
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
-                        $dbname = "events";
+                        $dbname = "delldb";
                     
                         $conn = new mysqli($servername, $username, $password, $dbname);
                     
@@ -85,17 +85,17 @@
                             die("Connection failed: " .$conn->connect_error);
                         }
 
-                        $sql = "SELECT event, date, startingtime, endingtime, venue, description FROM events";
+                        $sql = "SELECT eventname, datepicker, appt, app1, venue, description FROM event_table";
                         $result = $conn->query($sql);
 
                         // IMPORTANT!! php code use ', html code use ''
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
-                                echo "<h5 class='card-title'>". $row['event'] ."</h5>
-                                <p class='card-text'>". $row['date'] ."</p>
-                                <p class='card-text'>". $row['startingtime'] . $row['endingtime'] ."</p>
+                                echo "<h5 class='card-title'>". $row['eventname'] ."</h5>
+                                <p class='card-text'>". $row['datepicker'] ."</p>
+                                <p class='card-text'>". $row['appt'] . $row['app1'] ."</p>
+                                <p class='card-text'>". $row['app1'] ."</p>
                                 <p class='card-text'>". $row['venue'] ."</p>
-                                <p class='card-text'>". $row['description'] ."</p>
                                 <a href='#' class='btn btn-primary'>Register Now!</a>";
                             }
                         }

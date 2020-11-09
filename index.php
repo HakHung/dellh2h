@@ -59,24 +59,61 @@
         </div>
     </div>
 
+    
+
     <div class="container-fluid border border-info">
         <div class="alert alert-danger text-center">
             <strong>IMPORTANT ANNOUNCEMENT!!</strong><br>WORK FROM HOME (WFH) Effective from 27th October - 9th
             November 2020
         </div>
+        
         <div class='container'>
             <h4><b> 2nd Quarter (Oct - Dec)</b></h4>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mt-1">
                         <div class="card-body">
-                            <hr class="bg-info" />
                             <b class="h6">TRAINING</b>
-                            <div class="progress">
+                            <hr class="bg-info" />
+                            <div class="progress" style="height: 27px;">
+                            <?php
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $dbname = "delldb";
+                                
+                                    $conn = new mysqli($servername, $username, $password, $dbname);
+                                
+                                    if($conn->connect_error){
+                                        die("Connection failed: " .$conn->connect_error);
+                                    }
 
-                                <div class="progress-bar progress-bar-warning" style="width: 70%; min-width:20px">
-                                    7 hours
-                                </div>
+                                    $sql = "SELECT SUM(user_event.contribution) AS THour, HOUR(SUM(user_event.contribution)) AS Hr, MINUTE(SUM(user_event.contribution)) AS Min
+                                            FROM event_table, user_event
+                                            WHERE event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                                            ORDER BY datepicker";
+                                    
+                                    $result = $conn->query($sql);                    
+
+                                    if($result->num_rows>0){
+                                        while($row = $result->fetch_assoc()){
+                                            $percentage = $row['THour']/100000*100;
+                                            
+                                            if ($percentage > 100){
+                                                echo"<div class='progress-bar bg-warning' style='width:".$percentage."%; min-width:20px'>You reach the Goal!!</div>";
+                                            }
+                                            elseif($percentage == 0){
+                                                echo"<div class='progress-bar' style='width:0%; min-width:0px'></div>";
+                                            }
+                                            else{
+                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$row['Hr']." hours ".$row['Min']." minutes</div>";
+                                            }
+                                        }
+                                    }
+                                    
+                                    $conn->close();
+
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -84,13 +121,49 @@
                 <div class="col-md-4">
                     <div class="card mt-1">
                         <div class="card-body">
+                            <b class="h6">OTHER EVENTS</b>
                             <hr class="bg-info" />
-                            <b class="h6">VOLUNTEERING</b>
-                            <div class="progress">
+                            <div class="progress" style="height: 27px;">
+                            <?php
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $dbname = "delldb";
+                                
+                                    $conn = new mysqli($servername, $username, $password, $dbname);
+                                
+                                    if($conn->connect_error){
+                                        die("Connection failed: " .$conn->connect_error);
+                                    }
 
-                                <div class="progress-bar" style="width: 40%;">
-                                    4 hours
-                                </div>
+                                    $sql = "SELECT SUM(user_event.contribution) AS THour, HOUR(SUM(user_event.contribution)) AS Hr, MINUTE(SUM(user_event.contribution)) AS Min
+                                            FROM event_table, user_event
+                                            WHERE event_table.eventcategory ='other events' AND event_table.eventid = user_event.eventid AND userid=1
+                                            ORDER BY datepicker";
+                                    
+                                    $result = $conn->query($sql);                    
+
+                                    if($result->num_rows>0){
+                                        while($row = $result->fetch_assoc()){
+                                            $percentage = $row['THour']/100000*100;
+
+                                            // echo $row['THour'];
+                                            
+                                            if ($percentage > 100){
+                                                echo"<div class='progress-bar bg-warning' style='width:".$percentage."%; min-width:20px'>You reach the Goal!!</div>";
+                                            }
+                                            elseif($percentage == 0){
+                                                echo"<div class='progress-bar' style='width:0%; min-width:0px'></div>";
+                                            }
+                                            else{
+                                                echo"<div class='progress-bar progress-bar-striped progress-bar-animated bg-success' style='width:".$percentage."%; min-width:20px'>".$row['Hr']." hours ".$row['Min']." minutes</div>";
+                                            }
+                                        }
+                                    }
+                                    
+                                    $conn->close();
+
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -98,13 +171,44 @@
                 <div class="col-md-4">
                     <div class="card mt-1">
                         <div class="card-body">
+                            
+                            <b class="h6">NUMBER OF HOURS LEFT</b>
                             <hr class="bg-info" />
-                            <b class="h6">TOTAL</b>
-                            <div class="progress">
 
-                                <div class="progress-bar" style="width: 55%;">
-                                    55%
-                                </div>
+                            <div class="container text-center">
+                            <?php
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $dbname = "delldb";
+                                
+                                    $conn = new mysqli($servername, $username, $password, $dbname);
+                                
+                                    if($conn->connect_error){
+                                        die("Connection failed: " .$conn->connect_error);
+                                    }
+
+                                    $sql = "SELECT HOUR(TIMEDIFF('100000', SUM(user_event.contribution))) AS Hr, MINUTE(TIMEDIFF('100000', SUM(user_event.contribution))) AS Min
+                                            FROM event_table, user_event
+                                            WHERE event_table.eventcategory ='training' AND event_table.eventid = user_event.eventid AND userid=1
+                                            ORDER BY datepicker";
+                                    
+                                    $result = $conn->query($sql);                    
+
+                                    if($result->num_rows>0){
+                                        while($row = $result->fetch_assoc()){
+                                            // $percentage = $row['THour']/100000*100;
+                                            
+                                            echo"<h5>".$row['Hr']." hours ".$row['Min']." minutes </h5>";
+                                            
+                                        }
+                                    }
+                                    
+                                    $conn->close();
+
+                                ?>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -167,7 +271,6 @@
                                             <p>Date: ". $row['datepicker'] ."<br>
                                                 Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
                                                 Venue: ". $row['venue'] ."<br>
-                                                // Contribution hour: ". substr($row['contribution'],0, 2) ."hours ". substr($row['contribution'],3, 2) ."minutes<br>
                                                 Contribution hour: ". $row['contribution']."<br>
 
                                             </p>";
@@ -197,54 +300,7 @@
                         <div class="row">
                             
                             <h3><img src="schedule.png" class="rounded-circle" alt="schedule" height="90" style="vertical-align: middle">Event Schedule</h3>  
-                            <?php
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "";
-                                $dbname = "delldb";
-                            
-                                $conn = new mysqli($servername, $username, $password, $dbname);
-                            
-                                if($conn->connect_error){
-                                    die("Connection failed: " .$conn->connect_error);
-                                }
-
-                                date_default_timezone_set("Asia/Kuala_Lumpur");
-                                $date = date('Y-m-d');
-
-                                $sql = "SELECT event_table.eventname, event_table.eventtype, event_table.datepicker, event_table.appt, event_table.appt1, event_table.venue,event_table.compulsory 
-                                        FROM event_table, user_event
-                                        WHERE datepicker>='$date' AND eventcategory ='other events' AND event_table.eventid = user_event.eventid 
-                                        ORDER BY datepicker ";
-                                $result = $conn->query($sql);
-
-                                // IMPORTANT!! php code use ', html code use ''
-                                if($result->num_rows>0){
-                                    while($row = $result->fetch_assoc()){
-                                        echo "
-                                        <div class='col-md-12  mb-3'>
-                                            <div class='card m-1'><a href='details.html' style='text-decoration:none; color:black'>
-                                                <div class='card-header'>
-                                                    <h5 class='card-title'>". $row['eventname'] ."</h5>
-                                                    <h6 class='class-subtitle'>Volunteering</h6>
-                                                </div>
-                                            <div class='card-body'>
-                                            <p>Date: ". $row['datepicker'] ."<br>
-                                                    Time: ". $row['appt']. " - ". $row['appt1'] ."<br>
-                                                    Venue: ". $row['venue'] ."<br>
-                                                    Contribution hour: 2hours
-                                                </p>
-                                            </div>
-                                            </a>
-                                        </div>
-                                    </div>";
-                                    }
-                                }
-                                else{
-                                    echo '<h6>No events to show</h6>';
-                                }
-                                $conn->close();
-                            ?>                        
+                                
                             
                         </div>
                     </div>

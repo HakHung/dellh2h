@@ -46,7 +46,7 @@
             </ul>
             <ul class='navbar-nav'>
                 <li class='nav-item active'>
-                    <a class='nav-link' href='#'>Xuan</a>
+                    <a class='nav-link' href='#'>ACCOUNT</a>
                 </li>
                 <li class='nav-item active'>
                     <a class='nav-link' href='#'><small>Logout</small></a>

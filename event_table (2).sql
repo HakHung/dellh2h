@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 08:04 AM
+-- Generation Time: Nov 10, 2020 at 01:40 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -48,7 +48,10 @@ INSERT INTO `event_table` (`eventid`, `eventcategory`, `eventtype`, `eventname`,
 (1, 'Training', 'Workshop', 'dell', '2020-11-02', '10:00:00', '12:00:00', 'Room 1', 'Lorem ipsum dolor sit, amet consectetur adipisicin', 'Yes'),
 (2, 'Training', 'Webminar', 'dell2hack', '2020-11-09', '16:00:00', '18:00:00', 'Room 1', 'Lorem ipsum dolor sit, amet consectetur adipisicin', 'No'),
 (3, 'Other Events', 'Team Building', 'dellhire', '2020-11-19', '11:30:00', '13:30:00', 'Room 2', 'Lorem ipsum dolor sit, amet consectetur adipisicin', 'Yes'),
-(4, 'Other Events', 'Volunteering', 'dell2hire', '2020-11-19', '14:30:00', '16:30:00', 'Room 2', 'Lorem ipsum dolor sit, amet consectetur adipisicin', 'Yes');
+(4, 'Other Events', 'Volunteering', 'dell2hire', '2020-11-19', '14:30:00', '16:30:00', 'Room 2', 'Lorem ipsum dolor sit, amet consectetur adipisicin', 'Yes'),
+(5, 'Training', 'Workshop', 'dell', '2020-11-25', '10:53:00', '12:53:00', 'Room 1', '', 'Yes'),
+(6, 'Training', 'Workshop', 'dell', '2020-11-25', '10:53:00', '12:53:00', 'Room 1', '', 'Yes'),
+(7, 'Training', 'Workshop', 'dell', '2020-11-24', '08:39:00', '10:39:00', 'Room 1', '', 'No');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +72,7 @@ ALTER TABLE `event_table`
 -- AUTO_INCREMENT for table `event_table`
 --
 ALTER TABLE `event_table`
-  MODIFY `eventid` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `eventid` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
